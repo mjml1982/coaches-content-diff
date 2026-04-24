@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Workshop Purchase (Non-VIP) Workflow Review</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: #f4f6fa;
+      color: #1a1d23;
+      line-height: 1.6;
+    }
+
+    header {
+      background: linear-gradient(135deg, #1a56db 0%, #0d3baa 100%);
+      color: #fff;
+      padding: 40px 32px 32px;
+    }
+    header h1 { font-size: 1.75rem; font-weight: 700; margin-bottom: 6px; }
+    header p  { font-size: 0.95rem; opacity: 0.85; }
+    header .meta { display: flex; gap: 24px; margin-top: 16px; flex-wrap: wrap; }
+    header .meta span {
+      background: rgba(255,255,255,0.15);
+      border-radius: 6px;
+      padding: 4px 12px;
+      font-size: 0.82rem;
+      font-weight: 500;
+    }
+
+    main { max-width: 900px; margin: 32px auto; padding: 0 20px 60px; }
+
+    section { background: #fff; border-radius: 12px; padding: 28px 32px; margin-bottom: 24px; box-shadow: 0 1px 4px rgba(0,0,0,.07); }
+    section h2 { font-size: 1.1rem; font-weight: 700; color: #1a56db; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+    section h2::before { content: attr(data-icon); font-size: 1.2rem; }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .card {
+      border-radius: 10px;
+      padding: 18px 20px;
+      border-left: 4px solid;
+    }
+    .card.green  { background: #f0fdf4; border-color: #22c55e; }
+    .card.yellow { background: #fffbeb; border-color: #f59e0b; }
+    .card.red    { background: #fff1f2; border-color: #ef4444; }
+    .card.blue   { background: #eff6ff; border-color: #3b82f6; }
+    .card .label { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: .05em; opacity: .7; margin-bottom: 4px; }
+    .card .value { font-size: 1.05rem; font-weight: 700; }
+
+    table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+    th { background: #f1f5f9; text-align: left; padding: 10px 14px; font-weight: 600; color: #475569; font-size: 0.8rem; text-transform: uppercase; letter-spacing: .04em; }
+    td { padding: 11px 14px; border-bottom: 1px solid #f1f5f9; vertical-align: top; }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: #fafbfc; }
+
+    .badge {
+      display: inline-block;
+      padding: 2px 9px;
+      border-radius: 99px;
+      font-size: 0.76rem;
+      font-weight: 600;
+    }
+    .badge.issue   { background: #fee2e2; color: #b91c1c; }
+    .badge.ok      { background: #dcfce7; color: #15803d; }
+    .badge.warning { background: #fef3c7; color: #92400e; }
+    .badge.info    { background: #dbeafe; color: #1e40af; }
+
+    .highlight-box {
+      background: #fffbeb;
+      border: 1px solid #fde68a;
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin-top: 16px;
+      font-size: 0.9rem;
+    }
+    .highlight-box strong { color: #92400e; }
+
+    .comparison {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 16px;
+    }
+    @media (max-width: 600px) { .comparison { grid-template-columns: 1fr; } }
+    .comp-box { border-radius: 8px; padding: 16px 18px; font-size: 0.88rem; }
+    .comp-box h4 { font-size: 0.85rem; font-weight: 700; margin-bottom: 8px; }
+    .comp-box.original  { background: #f0fdf4; border: 1px solid #86efac; }
+    .comp-box.original h4  { color: #15803d; }
+    .comp-box.new        { background: #fff1f2; border: 1px solid #fca5a5; }
+    .comp-box.new h4     { color: #b91c1c; }
+    .comp-box ul { padding-left: 18px; }
+    .comp-box li { margin-bottom: 4px; }
+
+    .rec-item { display: flex; gap: 12px; padding: 14px 0; border-bottom: 1px solid #f1f5f9; }
+    .rec-item:last-child { border-bottom: none; }
+    .rec-num {
+      flex-shrink: 0;
+      width: 28px; height: 28px;
+      background: #1a56db;
+      color: #fff;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.8rem; font-weight: 700;
+    }
+    .rec-text strong { display: block; margin-bottom: 2px; }
+    .rec-text p { font-size: 0.88rem; color: #475569; }
+
+    .thread { border-left: 3px solid #cbd5e1; padding-left: 16px; margin-top: 12px; }
+    .thread .msg { margin-bottom: 14px; font-size: 0.9rem; }
+    .thread .msg .author { font-weight: 700; margin-bottom: 2px; }
+    .thread .msg .time   { font-size: 0.76rem; color: #94a3b8; margin-left: 6px; }
+    .thread .msg .text   { color: #334155; }
+
+    footer { text-align: center; padding: 24px; font-size: 0.8rem; color: #94a3b8; }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Workshop Purchase (Non-VIP) Workflow Review</h1>
+  <p>GoHighLevel Automation — Email &amp; SMS Copy Configuration Analysis</p>
+  <div class="meta">
+    <span>Date: April 25, 2026</span>
+    <span>Reported by: Rehan Saleem</span>
+    <span>Reviewed via: Slack Thread</span>
+    <span>Platform: GoHighLevel</span>
+  </div>
+</header>
+
+<main>
+
+  <!-- Summary Cards -->
+  <div class="summary-grid">
+    <div class="card green">
+      <div class="label">Workflow Status</div>
+      <div class="value">Created &amp; Drafted</div>
+    </div>
+    <div class="card blue">
+      <div class="label">Channels Configured</div>
+      <div class="value">Email &amp; SMS</div>
+    </div>
+    <div class="card red">
+      <div class="label">Key Issue</div>
+      <div class="value">Quick Compose Used</div>
+    </div>
+    <div class="card yellow">
+      <div class="label">Action Required</div>
+      <div class="value">Switch to Template</div>
+    </div>
+  </div>
+
+  <!-- Overview -->
+  <section>
+    <h2 data-icon="📋">Overview</h2>
+    <p>A new <strong>Workshop Purchase (Non-VIP)</strong> automation workflow has been created and drafted in GoHighLevel with updated email and SMS copy. The workflow is functional, but a configuration difference was flagged compared to the original workflow: the email step uses <strong>Quick Compose</strong> instead of being built from a saved template.</p>
+
+    <div class="highlight-box">
+      <strong>Key Finding:</strong> The email action in this workflow was built using GoHighLevel's "Quick Compose" editor — a basic inline rich-text builder — rather than loading a pre-designed template. This deviates from how the original workflow was set up and may result in inconsistent branding and layout.
+    </div>
+  </section>
+
+  <!-- Slack Thread -->
+  <section>
+    <h2 data-icon="💬">Source: Slack Discussion</h2>
+    <div class="thread">
+      <div class="msg">
+        <div class="author">Rehan Saleem <span class="time">~40 min ago</span></div>
+        <div class="text">Workshop Purchase (non-vip) workflow is created and drafted with new email and SMS copy. It has email as quick compose, not adding from template like the original one. Please review.<br>
+        <a href="https://app.gohighlevel.com/location/h83O4TKy09yLLdfnIw3K/workflow/8745f886-e327-4b75-8916-98dcf5fdf1d4" target="_blank" style="color:#1a56db; font-size:0.85rem; word-break:break-all;">GoHighLevel Workflow Link ↗</a>
+        </div>
+      </div>
+      <div class="msg">
+        <div class="author">Kas 🐱 <span class="time">~9 min ago</span></div>
+        <div class="text">@Rehan Saleem — Please using Claude explain further what you mean by "quick build etc"</div>
+      </div>
+      <div class="msg">
+        <div class="author">Rehan Saleem <span class="time">~1 min ago</span></div>
+        <div class="text">@Kas — I mean this, "quick compose" [shared screenshot showing the Quick Compose option highlighted in the GHL email step editor, versus "Create from Template"]</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Comparison -->
+  <section>
+    <h2 data-icon="⚖️">Configuration Comparison</h2>
+    <p style="margin-bottom:16px; font-size:0.9rem; color:#475569;">The table and boxes below contrast how the original workflow email step was built vs. how the new workflow email step was built.</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Attribute</th>
+          <th>Original Workflow</th>
+          <th>New (Non-VIP) Workflow</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Email Build Method</td>
+          <td>Create from Template</td>
+          <td>Quick Compose</td>
+          <td><span class="badge issue">Mismatch</span></td>
+        </tr>
+        <tr>
+          <td>SMS Copy</td>
+          <td>Existing copy</td>
+          <td>New copy drafted</td>
+          <td><span class="badge ok">Updated</span></td>
+        </tr>
+        <tr>
+          <td>Email Copy</td>
+          <td>Existing copy</td>
+          <td>New copy drafted</td>
+          <td><span class="badge ok">Updated</span></td>
+        </tr>
+        <tr>
+          <td>Workflow Draft Status</td>
+          <td>Published</td>
+          <td>Drafted (not published)</td>
+          <td><span class="badge warning">Pending Review</span></td>
+        </tr>
+        <tr>
+          <td>Template Branding</td>
+          <td>Inherited from saved template</td>
+          <td>Manual inline styling</td>
+          <td><span class="badge issue">Risk</span></td>
+        </tr>
+        <tr>
+          <td>Reusability</td>
+          <td>Template can be updated globally</td>
+          <td>Changes isolated to this workflow</td>
+          <td><span class="badge warning">Fragmented</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="comparison">
+      <div class="comp-box original">
+        <h4>✅ Original Workflow — Create from Template</h4>
+        <ul>
+          <li>Pulls from a saved, branded email template</li>
+          <li>Global template updates propagate automatically</li>
+          <li>Consistent layout, fonts, and brand colors</li>
+          <li>Easier to audit and maintain</li>
+        </ul>
+      </div>
+      <div class="comp-box new">
+        <h4>⚠️ New Workflow — Quick Compose</h4>
+        <ul>
+          <li>Email built directly in the workflow step editor</li>
+          <li>Basic rich-text only — no drag-and-drop template design</li>
+          <li>No automatic updates if brand changes</li>
+          <li>Harder to maintain across multiple workflows</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- What is Quick Compose -->
+  <section>
+    <h2 data-icon="❓">What Is "Quick Compose" in GoHighLevel?</h2>
+    <table>
+      <thead>
+        <tr><th>Feature</th><th>Quick Compose</th><th>Create from Template</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Editor Type</td><td>Inline rich-text (basic)</td><td>Full drag-and-drop builder</td></tr>
+        <tr><td>Saved Templates</td><td>Not used</td><td>Uses saved email templates</td></tr>
+        <tr><td>Brand Consistency</td><td>Manual — risk of drift</td><td>Automatic via template</td></tr>
+        <tr><td>Best For</td><td>Quick one-off plain emails</td><td>Branded, repeatable campaigns</td></tr>
+        <tr><td>Maintainability</td><td>Low</td><td>High</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- Recommendations -->
+  <section>
+    <h2 data-icon="✅">Recommendations</h2>
+    <div class="rec-item">
+      <div class="rec-num">1</div>
+      <div class="rec-text">
+        <strong>Replace Quick Compose with a Saved Template</strong>
+        <p>Open the email step in the new workflow, delete the Quick Compose content, and select "Create from Template." Choose the same base template used by the original VIP workflow (or create a Non-VIP variant of it).</p>
+      </div>
+    </div>
+    <div class="rec-item">
+      <div class="rec-num">2</div>
+      <div class="rec-text">
+        <strong>Migrate the Drafted Copy into the Template</strong>
+        <p>Port the new email copy (subject line, body, CTA) from the Quick Compose draft into the template builder so no content is lost.</p>
+      </div>
+    </div>
+    <div class="rec-item">
+      <div class="rec-num">3</div>
+      <div class="rec-text">
+        <strong>Review &amp; Publish After Fix</strong>
+        <p>Once the email step is corrected, run a test contact through the workflow to verify email and SMS fire correctly, then publish.</p>
+      </div>
+    </div>
+    <div class="rec-item">
+      <div class="rec-num">4</div>
+      <div class="rec-text">
+        <strong>Document Workflow SOP</strong>
+        <p>Add a brief internal note / SOP that all new GHL workflows must use "Create from Template" for email steps — not Quick Compose — to prevent this from recurring.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Workflow Link -->
+  <section>
+    <h2 data-icon="🔗">Workflow Reference</h2>
+    <table>
+      <tbody>
+        <tr>
+          <td style="width:160px; font-weight:600;">Workflow Name</td>
+          <td>Workshop Purchase (Non-VIP)</td>
+        </tr>
+        <tr>
+          <td style="font-weight:600;">GHL Workflow URL</td>
+          <td><a href="https://app.gohighlevel.com/location/h83O4TKy09yLLdfnIw3K/workflow/8745f886-e327-4b75-8916-98dcf5fdf1d4" target="_blank" style="color:#1a56db; word-break:break-all;">https://app.gohighlevel.com/location/h83O4TKy09yLLdfnIw3K/workflow/8745f886-e327-4b75-8916-98dcf5fdf1d4</a></td>
+        </tr>
+        <tr>
+          <td style="font-weight:600;">Status</td>
+          <td><span class="badge warning">Drafted — Not Published</span></td>
+        </tr>
+        <tr>
+          <td style="font-weight:600;">Issue</td>
+          <td><span class="badge issue">Email uses Quick Compose instead of Template</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+</main>
+
+<footer>Report generated April 25, 2026 · Workshop Purchase Non-VIP Workflow Review</footer>
+
+</body>
+</html>
