@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Appointment Booked Email — Broken Link Fix Report</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: #f4f6fa;
+      color: #1a1d23;
+      line-height: 1.6;
+    }
+
+    header {
+      background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
+      color: #fff;
+      padding: 40px 32px 32px;
+    }
+    header h1 { font-size: 1.75rem; font-weight: 700; margin-bottom: 6px; }
+    header p  { font-size: 0.95rem; opacity: 0.85; }
+    header .meta { display: flex; gap: 24px; margin-top: 16px; flex-wrap: wrap; }
+    header .meta span {
+      background: rgba(255,255,255,0.15);
+      border-radius: 6px;
+      padding: 4px 12px;
+      font-size: 0.82rem;
+      font-weight: 500;
+    }
+
+    main { max-width: 860px; margin: 32px auto; padding: 0 20px 60px; }
+
+    section { background: #fff; border-radius: 12px; padding: 28px 32px; margin-bottom: 24px; box-shadow: 0 1px 4px rgba(0,0,0,.07); }
+    section h2 { font-size: 1.1rem; font-weight: 700; color: #dc2626; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+    section h2::before { content: attr(data-icon); font-size: 1.2rem; }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-bottom: 8px;
+    }
+    .card {
+      border-radius: 10px;
+      padding: 18px 20px;
+      border-left: 4px solid;
+    }
+    .card.red    { background: #fff1f2; border-color: #ef4444; }
+    .card.green  { background: #f0fdf4; border-color: #22c55e; }
+    .card.yellow { background: #fffbeb; border-color: #f59e0b; }
+    .card .label { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: .05em; opacity: .7; margin-bottom: 4px; }
+    .card .value { font-size: 1rem; font-weight: 700; }
+
+    p { margin-bottom: 12px; font-size: 0.93rem; }
+    p:last-child { margin-bottom: 0; }
+
+    ul { padding-left: 20px; margin-bottom: 12px; }
+    li { margin-bottom: 6px; font-size: 0.93rem; }
+
+    .code-block {
+      background: #1e293b;
+      color: #e2e8f0;
+      border-radius: 8px;
+      padding: 16px 20px;
+      font-family: "Fira Code", "Cascadia Code", Consolas, monospace;
+      font-size: 0.88rem;
+      margin: 14px 0;
+      overflow-x: auto;
+    }
+    .code-block .label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      opacity: .5;
+      margin-bottom: 8px;
+    }
+    .highlight-red   { color: #f87171; }
+    .highlight-green { color: #4ade80; }
+
+    .badge {
+      display: inline-block;
+      padding: 2px 10px;
+      border-radius: 20px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      vertical-align: middle;
+    }
+    .badge.bug   { background: #fee2e2; color: #b91c1c; }
+    .badge.fixed { background: #dcfce7; color: #15803d; }
+
+    table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+    th { background: #f1f5f9; text-align: left; padding: 10px 14px; font-weight: 600; color: #475569; font-size: 0.8rem; text-transform: uppercase; letter-spacing: .04em; }
+    td { padding: 11px 14px; border-bottom: 1px solid #f1f5f9; vertical-align: top; }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: #fafbfc; }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Broken Link Fix — Appointment Booked Email</h1>
+  <p>Call-Booked Sequence · "Appointment Booked #2 – 24 Hours" template</p>
+  <div class="meta">
+    <span>Date: 2026-04-28</span>
+    <span>Platform: GoHighLevel (GHL)</span>
+    <span>Status: <span class="badge fixed">Fixed</span></span>
+  </div>
+</header>
+
+<main>
+
+  <!-- Summary cards -->
+  <div class="summary-grid">
+    <div class="card red">
+      <div class="label">Issue</div>
+      <div class="value">Meeting link not working</div>
+    </div>
+    <div class="card yellow">
+      <div class="label">Root Cause</div>
+      <div class="value">Merge tag used as href</div>
+    </div>
+    <div class="card green">
+      <div class="label">Fix</div>
+      <div class="value">Inline link in email body</div>
+    </div>
+  </div>
+
+  <!-- Issue -->
+  <section>
+    <h2 data-icon="🐛">What Went Wrong</h2>
+    <p>
+      In the <strong>Appointment Booked #2 – 24 Hours</strong> email, anchor text
+      <em>"Click here to join"</em> was present in the body. To turn it into a
+      clickable meeting link, GHL's merge tag <code>{{appointment.meeting_location}}</code>
+      was pasted directly into the <strong>Link URL</strong> field of GHL's
+      Add/Edit Link dialog.
+    </p>
+    <div class="code-block">
+      <div class="label">What was set as the href</div>
+      <span class="highlight-red">https://email-builder-prod.leadconnectorhq.com/%7B%7Bappointment.meeting_location%7D%7D</span>
+    </div>
+    <p>
+      GHL's email builder URL-encoded the curly braces in the merge tag
+      (<code>{</code> → <code>%7B</code>, <code>}</code> → <code>%7D</code>),
+      producing a literal, non-functional URL instead of resolving the dynamic
+      meeting link at send time.
+    </p>
+    <p>
+      As a result, recipients who clicked <em>"Click here to join"</em> landed
+      on a broken page — the merge tag was never substituted with the actual
+      Zoom / meeting URL.
+    </p>
+  </section>
+
+  <!-- Root cause detail -->
+  <section>
+    <h2 data-icon="🔍">Root Cause Detail</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Factor</th>
+          <th>Detail</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>GHL behavior</strong></td>
+          <td>The Link URL field in GHL's email builder treats its value as a static URL. Merge tags entered there are URL-encoded rather than resolved before send.</td>
+        </tr>
+        <tr>
+          <td><strong>Merge tag placement</strong></td>
+          <td><code>{{appointment.meeting_location}}</code> must appear as plain text inside the email body — not inside an href attribute — for GHL to substitute it correctly.</td>
+        </tr>
+        <tr>
+          <td><strong>Other emails in sequence</strong></td>
+          <td>The remaining call-booked emails handled this correctly by placing the merge tag directly in the body as a clickable text element, not through the Link URL dialog.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- Fix -->
+  <section>
+    <h2 data-icon="✅">Fix Applied</h2>
+    <p>
+      The broken hyperlink was removed from <em>"Click here to join"</em>.
+      Instead, <code>{{appointment.meeting_location}}</code> was placed directly
+      in the email body as inline text — consistent with how every other email
+      in the same Appointment Booked sequence handles the meeting link.
+    </p>
+    <div class="code-block">
+      <div class="label">Before (broken)</div>
+      <span class="highlight-red">&lt;a href="https://email-builder-prod.leadconnectorhq.com/%7B%7Bappointment.meeting_location%7D%7D"&gt;Click here to join&lt;/a&gt;</span>
+    </div>
+    <div class="code-block">
+      <div class="label">After (fixed)</div>
+      <span class="highlight-green">{{appointment.meeting_location}}</span>
+      <br>
+      <span style="opacity:.5; font-size:0.8rem;">— rendered by GHL at send time as the actual meeting URL</span>
+    </div>
+    <p>
+      When GHL sends the email it now resolves the merge tag to the real meeting
+      URL, which the recipient can click directly.
+    </p>
+  </section>
+
+  <!-- Why -->
+  <section>
+    <h2 data-icon="💡">Why This Fix Works</h2>
+    <ul>
+      <li>GHL resolves <code>{{…}}</code> merge tags that appear as <strong>body text</strong> at send time, substituting the actual value before the email leaves the system.</li>
+      <li>Merge tags placed inside an <code>href</code> attribute via the Link URL dialog are treated as static strings and URL-encoded, so they are never resolved.</li>
+      <li>Placing the merge tag in the body (rather than wrapping it in a separate hyperlink) mirrors the pattern used successfully in the other appointment-booked emails.</li>
+    </ul>
+  </section>
+
+</main>
+</body>
+</html>
