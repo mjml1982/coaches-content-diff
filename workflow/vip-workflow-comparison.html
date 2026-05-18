@@ -14,228 +14,187 @@
       padding: 32px 20px 60px;
     }
 
-    .page-header {
-      max-width: 1100px;
-      margin: 0 auto 36px;
-    }
+    /* ─── Page header ─── */
+    .page-header { max-width: 1160px; margin: 0 auto 36px; }
+    .page-header h1 { font-size: 26px; font-weight: 700; color: #1a1a2e; }
+    .page-header p { margin-top: 6px; font-size: 14px; color: #6b7280; }
 
-    .page-header h1 {
-      font-size: 26px;
-      font-weight: 700;
-      color: #1a1a2e;
-    }
+    .legend { display: flex; gap: 20px; flex-wrap: wrap; margin-top: 16px; }
+    .legend-item { display: flex; align-items: center; gap: 7px; font-size: 13px; color: #374151; }
 
-    .page-header p {
-      margin-top: 6px;
-      font-size: 14px;
-      color: #6b7280;
-    }
-
-    .legend {
-      display: flex;
-      gap: 20px;
-      flex-wrap: wrap;
-      margin-top: 16px;
-    }
-
-    .legend-item {
-      display: flex;
-      align-items: center;
-      gap: 7px;
-      font-size: 13px;
-      color: #374151;
-    }
-
+    /* ─── Badges ─── */
     .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      padding: 2px 9px;
-      border-radius: 999px;
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.3px;
-      white-space: nowrap;
+      display: inline-flex; align-items: center; gap: 4px;
+      padding: 2px 9px; border-radius: 999px;
+      font-size: 11px; font-weight: 600; letter-spacing: 0.3px; white-space: nowrap;
     }
-
     .badge-email { background: #dbeafe; color: #1d4ed8; }
     .badge-sms   { background: #dcfce7; color: #15803d; }
     .badge-both  { background: #fef3c7; color: #92400e; }
     .badge-cond  { background: #f3e8ff; color: #7c3aed; }
 
-    /* ─── Comparison grid ─── */
+    /* ─── Grid ─── */
     .grid {
-      max-width: 1100px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 28px;
+      max-width: 1160px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 28px;
     }
-
-    @media (max-width: 760px) {
-      .grid { grid-template-columns: 1fr; }
-    }
+    @media (max-width: 800px) { .grid { grid-template-columns: 1fr; } }
 
     .col-header {
-      border-radius: 12px 12px 0 0;
-      padding: 18px 22px 14px;
-      font-size: 17px;
-      font-weight: 700;
+      border-radius: 12px 12px 0 0; padding: 18px 22px 14px;
+      font-size: 17px; font-weight: 700;
     }
-
-    .col-live   .col-header { background: #1d4ed8; color: #fff; }
-    .col-draft  .col-header { background: #0f766e; color: #fff; }
-
-    .col-header .sub {
-      font-size: 12px;
-      font-weight: 400;
-      margin-top: 3px;
-      opacity: .85;
-    }
+    .col-live  .col-header { background: #1d4ed8; color: #fff; }
+    .col-draft .col-header { background: #0f766e; color: #fff; }
+    .col-header .sub { font-size: 12px; font-weight: 400; margin-top: 3px; opacity: .85; }
 
     .col-body {
-      background: #fff;
-      border-radius: 0 0 12px 12px;
-      padding: 20px 22px 24px;
-      box-shadow: 0 1px 6px rgba(0,0,0,.08);
+      background: #fff; border-radius: 0 0 12px 12px;
+      padding: 20px 22px 24px; box-shadow: 0 1px 6px rgba(0,0,0,.08);
     }
 
-    /* ─── Phase headings ─── */
+    /* ─── Phase labels ─── */
     .phase-label {
-      font-size: 10px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      color: #9ca3af;
-      margin: 22px 0 10px;
+      font-size: 10px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 1px; color: #9ca3af; margin: 22px 0 10px;
     }
-
     .phase-label:first-child { margin-top: 0; }
 
     /* ─── Steps ─── */
-    .step {
-      display: flex;
-      gap: 14px;
-      margin-bottom: 12px;
-    }
-
+    .step { display: flex; gap: 14px; margin-bottom: 14px; }
     .step:last-child { margin-bottom: 0; }
 
-    .step-dot-wrap {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding-top: 3px;
-    }
-
-    .step-dot {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      flex-shrink: 0;
-    }
-
+    .step-dot-wrap { display: flex; flex-direction: column; align-items: center; padding-top: 3px; }
+    .step-dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
     .dot-live  { background: #2563eb; }
     .dot-draft { background: #0d9488; }
+    .step-line { width: 2px; flex: 1; background: #e5e7eb; margin-top: 4px; }
 
-    .step-line {
-      width: 2px;
-      flex: 1;
-      background: #e5e7eb;
-      margin-top: 4px;
-    }
-
-    .step-content { flex: 1; }
+    .step-content { flex: 1; min-width: 0; }
 
     .step-timing {
-      font-size: 11px;
-      font-weight: 700;
-      color: #6b7280;
-      text-transform: uppercase;
-      letter-spacing: 0.4px;
-      margin-bottom: 4px;
+      font-size: 11px; font-weight: 700; color: #6b7280;
+      text-transform: uppercase; letter-spacing: 0.4px; margin-bottom: 4px;
     }
-
     .step-subject {
-      font-size: 13.5px;
-      font-weight: 600;
-      color: #111827;
-      margin-bottom: 5px;
-      line-height: 1.35;
+      font-size: 13.5px; font-weight: 600; color: #111827;
+      margin-bottom: 5px; line-height: 1.35;
     }
+    .step-subject.no-subject { font-style: italic; color: #6b7280; }
+    .step-tags { display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 8px; }
 
-    .step-subject.no-subject {
-      font-style: italic;
-      color: #6b7280;
+    /* ─── Expandable content ─── */
+    details { margin-top: 6px; }
+    details summary {
+      font-size: 11.5px; font-weight: 600; color: #6b7280;
+      cursor: pointer; user-select: none; list-style: none;
+      display: flex; align-items: center; gap: 5px;
     }
-
-    .step-tags { display: flex; gap: 5px; flex-wrap: wrap; }
-
-    /* ─── Delta summary table ─── */
-    .delta-section {
-      max-width: 1100px;
-      margin: 36px auto 0;
-      background: #fff;
-      border-radius: 12px;
-      box-shadow: 0 1px 6px rgba(0,0,0,.08);
-      overflow: hidden;
+    details summary::-webkit-details-marker { display: none; }
+    details summary::before {
+      content: '▶';
+      font-size: 9px;
+      transition: transform .15s;
+      display: inline-block;
     }
+    details[open] summary::before { transform: rotate(90deg); }
+    details summary:hover { color: #374151; }
 
-    .delta-header {
-      background: #1a1a2e;
-      color: #fff;
-      padding: 16px 22px;
-      font-size: 16px;
-      font-weight: 700;
-    }
+    .msg-block { margin-top: 10px; }
 
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 13px;
-    }
-
-    thead th {
+    /* Email preview */
+    .email-preview {
       background: #f9fafb;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: 8px;
+      font-size: 12.5px;
+    }
+    .email-preview-header {
+      background: #fff;
+      border-bottom: 1px solid #e5e7eb;
+      padding: 8px 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .email-icon {
+      width: 22px; height: 22px; border-radius: 50%;
+      background: #dbeafe; color: #1d4ed8;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 700; flex-shrink: 0;
+    }
+    .email-meta { flex: 1; min-width: 0; }
+    .email-subject-line { font-weight: 700; font-size: 12px; color: #111827; }
+    .email-from { font-size: 10.5px; color: #9ca3af; }
+    .email-body {
+      padding: 10px 12px 12px;
       color: #374151;
-      font-weight: 700;
-      text-align: left;
-      padding: 11px 16px;
-      border-bottom: 2px solid #e5e7eb;
+      line-height: 1.6;
+      white-space: pre-wrap;
+      font-size: 12px;
     }
 
+    /* SMS bubble */
+    .sms-preview {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      margin-bottom: 8px;
+    }
+    .sms-label {
+      font-size: 10px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .5px; color: #9ca3af; margin-bottom: 4px;
+    }
+    .sms-bubble {
+      background: #dcfce7;
+      color: #14532d;
+      border-radius: 12px 12px 12px 3px;
+      padding: 8px 12px;
+      font-size: 12px;
+      line-height: 1.55;
+      white-space: pre-wrap;
+      max-width: 100%;
+      border: 1px solid #bbf7d0;
+    }
+
+    /* ─── Delta table ─── */
+    .delta-section {
+      max-width: 1160px; margin: 36px auto 0;
+      background: #fff; border-radius: 12px;
+      box-shadow: 0 1px 6px rgba(0,0,0,.08); overflow: hidden;
+    }
+    .delta-header {
+      background: #1a1a2e; color: #fff;
+      padding: 16px 22px; font-size: 16px; font-weight: 700;
+    }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    thead th {
+      background: #f9fafb; color: #374151; font-weight: 700;
+      text-align: left; padding: 11px 16px; border-bottom: 2px solid #e5e7eb;
+    }
     tbody td {
-      padding: 11px 16px;
-      border-bottom: 1px solid #f3f4f6;
-      vertical-align: top;
-      line-height: 1.45;
+      padding: 11px 16px; border-bottom: 1px solid #f3f4f6;
+      vertical-align: top; line-height: 1.45;
     }
-
     tbody tr:last-child td { border-bottom: none; }
     tbody tr:hover td { background: #fafafa; }
 
     .change-added   { color: #059669; font-weight: 600; }
     .change-removed { color: #dc2626; font-weight: 600; }
     .change-revised { color: #d97706; font-weight: 600; }
-    .change-same    { color: #6b7280; }
 
     .tag-pill {
-      display: inline-block;
-      padding: 1px 7px;
-      border-radius: 999px;
-      font-size: 11px;
-      font-weight: 600;
+      display: inline-block; padding: 1px 7px; border-radius: 999px;
+      font-size: 11px; font-weight: 600;
     }
     .tag-live  { background: #dbeafe; color: #1d4ed8; }
     .tag-draft { background: #ccfbf1; color: #0f766e; }
-    .tag-both2 { background: #f0fdf4; color: #166534; }
 
     .footnote {
-      max-width: 1100px;
-      margin: 20px auto 0;
-      font-size: 12px;
-      color: #9ca3af;
-      line-height: 1.6;
+      max-width: 1160px; margin: 20px auto 0;
+      font-size: 12px; color: #9ca3af; line-height: 1.6;
     }
   </style>
 </head>
@@ -243,7 +202,7 @@
 
 <div class="page-header">
   <h1>VIP Workflow Comparison &mdash; Live vs Draft</h1>
-  <p>Generated May 18, 2026 &nbsp;|&nbsp; Clients on Demand &nbsp;|&nbsp; Both workflows include an Instant send followed by timed follow-ups</p>
+  <p>Generated May 18, 2026 &nbsp;|&nbsp; Clients on Demand &nbsp;|&nbsp; Both workflows include an Instant send followed by timed follow-ups &nbsp;|&nbsp; Click <strong>▶ View content</strong> on any step to expand the full message</p>
   <div class="legend">
     <span class="legend-item"><span class="badge badge-email">Email</span> Email only</span>
     <span class="legend-item"><span class="badge badge-sms">SMS</span> SMS only</span>
@@ -253,10 +212,12 @@
 </div>
 
 
-<!-- ═══ Side-by-side columns ═══ -->
+<!-- ═══════════════════════════════════════════
+     SIDE-BY-SIDE COLUMNS
+════════════════════════════════════════════ -->
 <div class="grid">
 
-  <!-- ── LIVE COLUMN ── -->
+  <!-- ══ LIVE COLUMN ══ -->
   <div class="col-live">
     <div class="col-header">
       Live Workflow
@@ -264,73 +225,304 @@
     </div>
     <div class="col-body">
 
+      <!-- ── Phase 1 ── -->
       <div class="phase-label">Phase 1 — Upgrade Confirmation</div>
 
+      <!-- Live Step 1: Instant -->
       <div class="step">
         <div class="step-dot-wrap"><div class="step-dot dot-live"></div><div class="step-line"></div></div>
         <div class="step-content">
           <div class="step-timing">T + 0 &nbsp;(Instant on upgrade)</div>
           <div class="step-subject">You're In! Your VIP Workshop Seat is Confirmed</div>
           <div class="step-tags"><span class="badge badge-both">Email + SMS</span></div>
+          <details>
+            <summary>View content</summary>
+            <div class="msg-block">
+              <div class="email-preview">
+                <div class="email-preview-header">
+                  <div class="email-icon">E</div>
+                  <div class="email-meta">
+                    <div class="email-subject-line">You're In! Your VIP Workshop Seat is Confirmed</div>
+                    <div class="email-from">From: Russ Ruffino</div>
+                  </div>
+                </div>
+                <div class="email-body">Hi {{contact.first_name}},
+
+You're officially VIP - here's everything you've unlocked.
+
+📲 Your Live VIP Q&A With Russ
+
+Your VIP Call is on {{custom_values.cod_auto_workshop_vip_date_pretty}} @ {{custom_values.cod_auto_workshop_vip_time_pretty}} {{custom_values.cod_auto_workshop_timezone}}.
+
+Come ready with your biggest questions - this is your chance to get direct, personalised input from Russ on your offer.
+
+
+📕 Your Access to our AI Template Library
+
+Once the workshop is concluded, we will email you a replay and the AI template library! :)
+
+You went VIP for a reason - make the most of every piece. Start with the replay, get your questions ready for Russ, and lock in your mapping session before the slots fill.
+
+If you have any questions in the meantime, feel free to reach out to support@russruffino.com our team is here to help.
+
+
+See you inside!
+
+- Russ Ruffino</div>
+              </div>
+              <div class="sms-preview">
+                <div class="sms-label">SMS</div>
+                <div class="sms-bubble">Hey {{contact.first_name}},
+
+You're in as a VIP for the AI Workshop! 🎉
+
+Watch your email for access details.
+
+Excited to have you!</div>
+              </div>
+            </div>
+          </details>
         </div>
       </div>
 
+      <!-- Live Step 2: T+10min -->
       <div class="step">
         <div class="step-dot-wrap"><div class="step-dot dot-live"></div><div class="step-line"></div></div>
         <div class="step-content">
           <div class="step-timing">T + 10 min &nbsp;(after upgrade)</div>
           <div class="step-subject">🚨 Your VIP Call Details</div>
           <div class="step-tags"><span class="badge badge-email">Email</span></div>
+          <details>
+            <summary>View content</summary>
+            <div class="msg-block">
+              <div class="email-preview">
+                <div class="email-preview-header">
+                  <div class="email-icon">E</div>
+                  <div class="email-meta">
+                    <div class="email-subject-line">🚨Your VIP Call Details</div>
+                    <div class="email-from">From: Russ Ruffino</div>
+                  </div>
+                </div>
+                <div class="email-body">Hi {{contact.first_name}},
+
+Your VIP Call is on {{custom_code.2.output.result.vipDate}}
+
+Here's the info you will need to access that call:
+
+🔗 Zoom Link: {{custom_values.cod_auto_workshop_vip_link}}
+
+🔒 Password: RUSSVIP
+
+📅 Date/Time: {{custom_code.2.output.result.vipDate}} @ {{custom_code.2.output.result.vipTime}} {{custom_values.cod_auto_workshop_timezone}}
+
+Mark your calendar, clear your schedule, and come ready with more questions from the workshop.
+
+See you then!
+
+– Russ Ruffino</div>
+              </div>
+            </div>
+          </details>
         </div>
       </div>
 
-
+      <!-- ── Phase 2 ── -->
       <div class="phase-label">Phase 2 — Pre-Event Reminders</div>
 
+      <!-- Live Step 3: 5h before -->
       <div class="step">
         <div class="step-dot-wrap"><div class="step-dot dot-live"></div><div class="step-line"></div></div>
         <div class="step-content">
           <div class="step-timing">5 hours before event</div>
           <div class="step-subject">🚨 Your VIP Call with Russ</div>
           <div class="step-tags"><span class="badge badge-both">Email + SMS</span></div>
+          <details>
+            <summary>View content</summary>
+            <div class="msg-block">
+              <div class="email-preview">
+                <div class="email-preview-header">
+                  <div class="email-icon">E</div>
+                  <div class="email-meta">
+                    <div class="email-subject-line">🚨Your VIP Call with Russ</div>
+                    <div class="email-from">From: Russ Ruffino</div>
+                  </div>
+                </div>
+                <div class="email-body">Hi {{contact.first_name}},
+
+Just a quick heads-up — our VIP Call is coming up 🙌
+
+Here's your access info:
+
+🔗 Zoom Link: {{custom_values.cod_auto_workshop_vip_link}}
+
+🔒 Password: RUSSVIP
+
+📅 Date/Time: {{custom_code.2.output.result.vipDate}} @ {{custom_code.2.output.result.vipTime}}  {{custom_values.cod_auto_workshop_timezone}}
+
+Mark your calendar, clear your schedule, and come ready with more questions.
+
+See you then!
+
+– Russ Ruffino</div>
+              </div>
+              <div class="sms-preview">
+                <div class="sms-label">SMS</div>
+                <div class="sms-bubble">Reminder: Your VIP Q&A Call with Russ is coming up - {{custom_code.2.output.result.vipDate}} @ {{custom_code.2.output.result.vipTime}} {{custom_values.cod_auto_workshop_timezone}}!
+
+Join here: {{custom_values.cod_auto_workshop_vip_link}}
+
+Password: RUSSVIP</div>
+              </div>
+            </div>
+          </details>
         </div>
       </div>
 
+      <!-- Live Step 4: 1h before -->
       <div class="step">
         <div class="step-dot-wrap"><div class="step-dot dot-live"></div><div class="step-line"></div></div>
         <div class="step-content">
           <div class="step-timing">1 hour before event</div>
           <div class="step-subject">⏰ We're going LIVE in 1 Hour – Your VIP Call with Russ</div>
           <div class="step-tags"><span class="badge badge-both">Email + SMS</span></div>
+          <details>
+            <summary>View content</summary>
+            <div class="msg-block">
+              <div class="email-preview">
+                <div class="email-preview-header">
+                  <div class="email-icon">E</div>
+                  <div class="email-meta">
+                    <div class="email-subject-line">⏰ We're going LIVE in 1 Hour – Your VIP Call with Russ</div>
+                    <div class="email-from">From: Russ Ruffino</div>
+                  </div>
+                </div>
+                <div class="email-body">Hi {{contact.first_name}},
+
+We're just 1 hour away from going LIVE with your VIP Call!
+
+Here's your access info one more time:
+
+🔗 Zoom Link: {{custom_values.cod_auto_workshop_vip_link}}
+🔒 Password: RUSSVIP
+📅 Date/Time: TODAY - {{custom_code.2.output.result.vipDate}} @ {{custom_code.2.output.result.vipTime}} {{custom_values.cod_auto_workshop_timezone}}
+
+Let's do this!
+– Russ Ruffino</div>
+              </div>
+              <div class="sms-preview">
+                <div class="sms-label">SMS</div>
+                <div class="sms-bubble">Reminder: Your VIP Q&A Call with Russ starts in 1 HOUR - {{custom_code.2.output.result.vipTime}} {{custom_values.cod_auto_workshop_timezone}}!
+
+Join here: {{custom_values.cod_auto_workshop_vip_link}}
+
+Password: RUSSVIP
+
+Let's get any final questions you have answered and your high-ticket offer done! — Russ</div>
+              </div>
+            </div>
+          </details>
         </div>
       </div>
 
+      <!-- Live Step 5: 15min before -->
       <div class="step">
         <div class="step-dot-wrap"><div class="step-dot dot-live"></div><div class="step-line"></div></div>
         <div class="step-content">
           <div class="step-timing">15 minutes before event</div>
           <div class="step-subject">⏰ 15 min – Your VIP Call with Russ</div>
           <div class="step-tags"><span class="badge badge-both">Email + SMS</span></div>
+          <details>
+            <summary>View content</summary>
+            <div class="msg-block">
+              <div class="email-preview">
+                <div class="email-preview-header">
+                  <div class="email-icon">E</div>
+                  <div class="email-meta">
+                    <div class="email-subject-line">⏰ 15min - Your VIP Call with Russ</div>
+                    <div class="email-from">From: Russ Ruffino</div>
+                  </div>
+                </div>
+                <div class="email-body">Hi {{contact.first_name}},
+
+We're going LIVE in 15 minutes with your VIP Call!
+
+Here's your access info one more time:
+
+🔗 Zoom Link: {{custom_values.cod_auto_workshop_vip_link}}
+🔒 Password: RUSSVIP
+📅 Date/Time: TODAY - {{custom_code.2.output.result.vipDate}} @ {{custom_code.2.output.result.vipTime}} {{custom_values.cod_auto_workshop_timezone}}
+
+Let's do this!
+– Russ Ruffino</div>
+              </div>
+              <div class="sms-preview">
+                <div class="sms-label">SMS</div>
+                <div class="sms-bubble">Reminder: Your VIP Q&A Call with Russ starts at the top of the hour - {{custom_code.2.output.result.vipTime}} {{custom_values.cod_auto_workshop_timezone}}!
+
+Join here: {{custom_values.cod_auto_workshop_vip_link}}
+
+Password: RUSSVIP
+
+Let's get any final questions you have answered and your high-ticket offer done! — Russ</div>
+              </div>
+            </div>
+          </details>
         </div>
       </div>
 
-
+      <!-- ── Phase 3 ── -->
       <div class="phase-label">Phase 3 — Post-Event</div>
 
+      <!-- Live Step 6: T+27h replay -->
       <div class="step">
         <div class="step-dot-wrap"><div class="step-dot dot-live"></div></div>
         <div class="step-content">
           <div class="step-timing">T + 27 hours &nbsp;(after upgrade)</div>
           <div class="step-subject">Your Workshop Replay</div>
           <div class="step-tags"><span class="badge badge-email">Email</span></div>
+          <details>
+            <summary>View content</summary>
+            <div class="msg-block">
+              <div class="email-preview">
+                <div class="email-preview-header">
+                  <div class="email-icon">E</div>
+                  <div class="email-meta">
+                    <div class="email-subject-line">Your Workshop Replay</div>
+                    <div class="email-from">From: Russ Ruffino</div>
+                  </div>
+                </div>
+                <div class="email-body">Hi {{contact.first_name}},
+
+Thank you again for joining us as a VIP for the Workshop — you showed up big, and we hope you're already putting those strategies to work!
+
+As promised, here's your exclusive VIP replay access and access to the Ai prompts:
+
+🎥 Workshop Recording
+
+Link: https://www.clientsondemand.com/hto.replay
+
+Password: 7%@l^Nxb
+
+Prompt Library:
+https://items-obey-2ps.craft.me/s2HtZ1VyYS24Am
+
+Password: russisawesome
+
+
+Feel free to revisit the training anytime — pause, rewind, and take notes at your own pace.
+
+-Russ</div>
+              </div>
+            </div>
+          </details>
         </div>
       </div>
 
-    </div><!-- /col-body -->
+    </div><!-- /col-body live -->
   </div><!-- /col-live -->
 
 
-  <!-- ── DRAFT COLUMN ── -->
+  <!-- ══ DRAFT COLUMN ══ -->
   <div class="col-draft">
     <div class="col-header">
       Draft Workflow
@@ -338,111 +530,420 @@
     </div>
     <div class="col-body">
 
+      <!-- ── Phase 1 ── -->
       <div class="phase-label">Phase 1 — Signup Confirmation</div>
 
+      <!-- Draft Step 1: Instant -->
       <div class="step">
         <div class="step-dot-wrap"><div class="step-dot dot-draft"></div><div class="step-line"></div></div>
         <div class="step-content">
           <div class="step-timing">T + 0 &nbsp;(Instant on signup)</div>
           <div class="step-subject no-subject">(Workshop + VIP Q&amp;A confirmation — no subject line)</div>
           <div class="step-tags"><span class="badge badge-both">Email + SMS</span></div>
+          <details>
+            <summary>View content</summary>
+            <div class="msg-block">
+              <div class="email-preview">
+                <div class="email-preview-header">
+                  <div class="email-icon">E</div>
+                  <div class="email-meta">
+                    <div class="email-subject-line"><em style="color:#9ca3af">No subject line specified</em></div>
+                    <div class="email-from">From: Russ Ruffino</div>
+                  </div>
+                </div>
+                <div class="email-body">Hi {{contact.first_name}},
+You're officially a VIP. You now have two sessions on your calendar. Here's everything you need.
+
+YOUR WORKSHOP
+Date: {{ contact.booked_workshop_pretty_date }} Pacific
+Access Link: {{contact.joinurl}}
+This is where you'll learn the exact framework to build a high-ticket coaching program using AI. You'll walk through the entire system and build your offer live during the session using AI prompts we give you. Come ready to work. By the end, you'll have something real on paper.
+Save the access link above. We'll send you a reminder 1 hour before and again at 15 minutes.
+
+YOUR FRIDAY VIP Q&A WITH RUSS
+Date: {{custom_values.cod_auto_workshop_vip_date_pretty}} at {{custom_values.cod_auto_workshop_vip_time_pretty}} {{custom_values.cod_auto_workshop_timezone}}
+Zoom Link: {{custom_values.cod_auto_workshop_vip_link}}
+Password: RUSSVIP
+This is a separate live session on a different day. I take your questions and review real offers from the group. Small group, real conversation, no scripts. This is a one-time event. If you want to get your questions answered and your offer sharpened, Friday is your one shot.
+
+Someone from our team will also personally reach out to make sure you're set up and ready for both sessions.
+
+Add both dates to your calendar now so nothing slips.
+
+Talk soon,
+Russ Ruffino
+Clients on Demand
+
+P.S. The Friday VIP Q&A is a one-time live event. If you want your offer reviewed and your questions answered, Friday is it.</div>
+              </div>
+              <div class="sms-preview">
+                <div class="sms-label">SMS</div>
+                <div class="sms-bubble">Hey {{contact.first_name}}, you're confirmed for the workshop + Friday VIP Q&A with Russ on {{custom_values.cod_auto_workshop_vip_date_pretty}} at {{custom_values.cod_auto_workshop_vip_time_pretty}} {{custom_values.cod_auto_workshop_timezone}}. Small group, real conversation. Check email for full details.</div>
+              </div>
+            </div>
+          </details>
         </div>
       </div>
 
-
+      <!-- ── Phase 2 ── -->
       <div class="phase-label">Phase 2 — Pre-Event Reminders</div>
 
+      <!-- Draft Step 2: 48h before (Wednesday) -->
       <div class="step">
         <div class="step-dot-wrap"><div class="step-dot dot-draft"></div><div class="step-line"></div></div>
         <div class="step-content">
           <div class="step-timing">48 hours before event &nbsp;(Wednesday)</div>
           <div class="step-subject">Friday is 48 hours out. Here's how to make the most of it.</div>
           <div class="step-tags"><span class="badge badge-email">Email</span></div>
+          <details>
+            <summary>View content</summary>
+            <div class="msg-block">
+              <div class="email-preview">
+                <div class="email-preview-header">
+                  <div class="email-icon">E</div>
+                  <div class="email-meta">
+                    <div class="email-subject-line">Friday is 48 hours out. Here's how to make the most of it, {{contact.first_name}}.</div>
+                    <div class="email-from">From: Russ Ruffino</div>
+                  </div>
+                </div>
+                <div class="email-body">Hi {{contact.first_name}},
+Friday is two days away.
+
+If you want to walk away from the Friday VIP Q&A with real clarity on your offer, the best thing you can do is show up prepared. You don't need a finished offer. You don't need a polished pitch. You just need to think through a few things before we get on the call.
+
+Here are three questions worth sitting with before Friday:
+Who do you help, and what specific problem do you solve for them?
+What result can someone expect from working with you, and roughly how long does it take?
+What's the one thing about your offer you're most unsure about right now?
+
+Bring your answers, even if they're rough.
+
+Here's how Friday works: I open the floor. You can ask questions in the chat or unmute when called on. I'll pull offers from attendees and break them down live. Come with your offer rough draft and at least one question. Small group, real conversation, no scripts.
+
+Your session details:
+Friday VIP Q&A with Russ: {{custom_code.2.output.result.vipDate}} at {{custom_code.2.output.result.vipTime}} {{custom_values.cod_auto_workshop_timezone}}
+Zoom link: {{custom_values.cod_auto_workshop_vip_link}}
+Password: RUSSVIP
+
+This is a live session. There's no make-up. Come ready.
+
+See you soon,
+Russ Ruffino
+Clients on Demand</div>
+              </div>
+            </div>
+          </details>
         </div>
       </div>
 
+      <!-- Draft Step 3: 24h before (Thursday) -->
       <div class="step">
         <div class="step-dot-wrap"><div class="step-dot dot-draft"></div><div class="step-line"></div></div>
         <div class="step-content">
           <div class="step-timing">24 hours before event &nbsp;(Thursday)</div>
           <div class="step-subject">Tomorrow, [name]. One day out.</div>
           <div class="step-tags"><span class="badge badge-both">Email + SMS</span></div>
+          <details>
+            <summary>View content</summary>
+            <div class="msg-block">
+              <div class="email-preview">
+                <div class="email-preview-header">
+                  <div class="email-icon">E</div>
+                  <div class="email-meta">
+                    <div class="email-subject-line">Tomorrow, {{contact.first_name}}. One day out.</div>
+                    <div class="email-from">From: Russ Ruffino</div>
+                  </div>
+                </div>
+                <div class="email-body">Hi {{contact.first_name}},
+Your Friday VIP Q&A with Russ is tomorrow.
+
+{{custom_code.2.output.result.vipDate}} at {{custom_code.2.output.result.vipTime}} {{custom_values.cod_auto_workshop_timezone}}.
+Zoom: {{custom_values.cod_auto_workshop_vip_link}}
+Password: RUSSVIP
+
+If you answered those three questions from yesterday's email, you're ready. If you didn't, spend 10 minutes on them tonight. You'll get 10x more out of tomorrow.
+
+This is the session people remember. Be there.
+
+See you tomorrow,
+Russ Ruffino
+Clients on Demand</div>
+              </div>
+              <div class="sms-preview">
+                <div class="sms-label">SMS</div>
+                <div class="sms-bubble">{{contact.first_name}}, Friday VIP Q&A with Russ is tomorrow at {{custom_code.2.output.result.vipTime}} {{custom_values.cod_auto_workshop_timezone}}. Bring your questions. Zoom: {{custom_values.cod_auto_workshop_vip_link}} Password: RUSSVIP</div>
+              </div>
+            </div>
+          </details>
         </div>
       </div>
 
+      <!-- Draft Step 4: 2-3h before (Friday morning) -->
       <div class="step">
         <div class="step-dot-wrap"><div class="step-dot dot-draft"></div><div class="step-line"></div></div>
         <div class="step-content">
           <div class="step-timing">2–3 hours before event &nbsp;(Friday morning)</div>
           <div class="step-subject">Today's the day, [name].</div>
           <div class="step-tags"><span class="badge badge-email">Email</span></div>
+          <details>
+            <summary>View content</summary>
+            <div class="msg-block">
+              <div class="email-preview">
+                <div class="email-preview-header">
+                  <div class="email-icon">E</div>
+                  <div class="email-meta">
+                    <div class="email-subject-line">Today's the day, {{contact.first_name}}.</div>
+                    <div class="email-from">From: Russ Ruffino</div>
+                  </div>
+                </div>
+                <div class="email-body">Hi {{contact.first_name}},
+It's happening today.
+
+{{custom_code.2.output.result.vipTime}} {{custom_values.cod_auto_workshop_timezone}} on Zoom: {{custom_values.cod_auto_workshop_vip_link}}
+Password: RUSSVIP
+
+See you in the room.
+Russ Ruffino
+Clients on Demand</div>
+              </div>
+            </div>
+          </details>
         </div>
       </div>
 
+      <!-- Draft Step 4b: 30min before SMS -->
       <div class="step">
         <div class="step-dot-wrap"><div class="step-dot dot-draft"></div><div class="step-line"></div></div>
         <div class="step-content">
           <div class="step-timing">30 minutes before event</div>
           <div class="step-subject no-subject">(Going live in 30 min — join link)</div>
           <div class="step-tags"><span class="badge badge-sms">SMS</span></div>
+          <details>
+            <summary>View content</summary>
+            <div class="msg-block">
+              <div class="sms-preview">
+                <div class="sms-label">SMS</div>
+                <div class="sms-bubble">{{contact.first_name}}, Going live in 30 min. Join now: {{custom_values.cod_auto_workshop_vip_link}} Password: RUSSVIP</div>
+              </div>
+            </div>
+          </details>
         </div>
       </div>
 
-
+      <!-- ── Phase 3 ── -->
       <div class="phase-label">Phase 3 — Post-Event Follow-Up</div>
 
+      <!-- Draft Step 5: Event+24h -->
       <div class="step">
         <div class="step-dot-wrap"><div class="step-dot dot-draft"></div><div class="step-line"></div></div>
         <div class="step-content">
           <div class="step-timing">Event + 24 hours</div>
           <div class="step-subject">Great Q&amp;A yesterday, [name].</div>
           <div class="step-tags"><span class="badge badge-email">Email</span></div>
+          <details>
+            <summary>View content</summary>
+            <div class="msg-block">
+              <div class="email-preview">
+                <div class="email-preview-header">
+                  <div class="email-icon">E</div>
+                  <div class="email-meta">
+                    <div class="email-subject-line">Great Q&A yesterday, {{contact.first_name}}.</div>
+                    <div class="email-from">From: Russ Ruffino</div>
+                  </div>
+                </div>
+                <div class="email-body">Hi {{contact.first_name}},
+Great Q&A yesterday.
+
+Between the workshop and Friday's session, you've covered a lot of ground this week. You built your offer. You heard me break down real offers from the group. You got your questions answered.
+
+Now the question is: what do you do with all of it?
+
+You probably left yesterday energized. You can see the path. You know who you help, what you charge, how the system works. But there's a gap between having the framework and knowing exactly how to deploy it in your specific market, to your specific audience, right now.
+
+That's what the strategy call is for. It's a complimentary working session where we look at your specific situation and map out what the next 90 days look like. Not a pitch. A plan.
+
+Book your strategy call: www.clientsondemand.com/apply
+
+You put in the work this week. Let's make sure it turns into something real.
+
+Russ Ruffino
+Clients on Demand</div>
+              </div>
+            </div>
+          </details>
         </div>
       </div>
 
+      <!-- Draft Step 6: Event+49h -->
       <div class="step">
         <div class="step-dot-wrap"><div class="step-dot dot-draft"></div><div class="step-line"></div></div>
         <div class="step-content">
           <div class="step-timing">Event + 49 hours</div>
           <div class="step-subject">Had a chance to process everything yet, [name]?</div>
           <div class="step-tags"><span class="badge badge-email">Email</span><span class="badge badge-cond">Conditional</span></div>
+          <details>
+            <summary>View content</summary>
+            <div class="msg-block">
+              <div class="email-preview">
+                <div class="email-preview-header">
+                  <div class="email-icon">E</div>
+                  <div class="email-meta">
+                    <div class="email-subject-line">Had a chance to process everything yet, {{contact.first_name}}?</div>
+                    <div class="email-from">From: Russ Ruffino</div>
+                  </div>
+                </div>
+                <div class="email-body">Hey {{contact.first_name}},
+Just checking in.
+
+You covered a lot of ground this week. The workshop, Friday's Q&A, everything I broke down with the group. That's a lot to process in a few days.
+
+Here's the trap I see most VIP attendees fall into at this point. Friday's energy is fresh on Saturday. By Sunday it's softer. By Monday morning, everything else has filled the space, the notes from Friday are sitting there, and the clarity starts to fade.
+
+That's not a failure of motivation. That's just life moving fast.
+
+The problem is the gap between "I have the knowledge" and "I have a clear plan for what to do with it." That gap is exactly what the strategy call is built to close. It's not a sales pitch. It's a working session where we look at your specific situation and map out what the next 90 days actually look like for you.
+
+If the Friday Q&A sparked something, don't let it cool down.
+
+Book your strategy call here: www.clientsondemand.com/apply
+
+Talk soon,
+Russ Ruffino
+Clients on Demand</div>
+              </div>
+            </div>
+          </details>
         </div>
       </div>
 
+      <!-- Draft Step 7: ~72-96h -->
       <div class="step">
         <div class="step-dot-wrap"><div class="step-dot dot-draft"></div><div class="step-line"></div></div>
         <div class="step-content">
-          <div class="step-timing">Event + ~72–96 hours &nbsp;(timing unspecified)</div>
+          <div class="step-timing">Event + ~72–96 hours &nbsp;<em style="color:#9ca3af;font-weight:400">(timing unspecified in source)</em></div>
           <div class="step-subject">The gap between knowing and doing (and how to close it)</div>
           <div class="step-tags"><span class="badge badge-email">Email</span><span class="badge badge-cond">Conditional</span></div>
+          <details>
+            <summary>View content</summary>
+            <div class="msg-block">
+              <div class="email-preview">
+                <div class="email-preview-header">
+                  <div class="email-icon">E</div>
+                  <div class="email-meta">
+                    <div class="email-subject-line">The gap between knowing and doing (and how to close it)</div>
+                    <div class="email-from">From: Russ Ruffino</div>
+                  </div>
+                </div>
+                <div class="email-body">Hey {{contact.first_name}},
+Here's a pattern I've watched play out hundreds of times.
+
+You attend the workshop. You build your offer live in the session. You upgrade to VIP, come to the Friday Q&A, ask your questions, hear me break down real offers from the group. You leave energized. You have everything you need on paper.
+
+And then... nothing moves.
+
+Not because the offer is wrong. Not because you aren't capable. But because having the framework and knowing how to deploy it in your specific market, to your specific audience, at this specific moment in your business, are two completely different things.
+
+The strategy call is where that second part happens.
+
+It's the session where we look at where you actually are, who you're trying to reach, what's blocking you from getting there, and what the fastest path to your first (or next) high-ticket client looks like. Concrete. Specific to you.
+
+If you're sitting on a strong offer and a clear idea of who you help, you're closer than you think. The call is the next move.
+
+Book here: www.clientsondemand.com/apply
+
+Russ Ruffino
+Clients on Demand</div>
+              </div>
+            </div>
+          </details>
         </div>
       </div>
 
+      <!-- Draft Step 8: Event+119h -->
       <div class="step">
         <div class="step-dot-wrap"><div class="step-dot dot-draft"></div><div class="step-line"></div></div>
         <div class="step-content">
-          <div class="step-timing">Event + 119 hours</div>
+          <div class="step-timing">Event + 119 hours &nbsp;<em style="color:#9ca3af;font-weight:400">(≈ 5 days)</em></div>
           <div class="step-subject">This is the last email I'll send about this, [name]</div>
           <div class="step-tags"><span class="badge badge-email">Email</span><span class="badge badge-cond">Conditional</span></div>
+          <details>
+            <summary>View content</summary>
+            <div class="msg-block">
+              <div class="email-preview">
+                <div class="email-preview-header">
+                  <div class="email-icon">E</div>
+                  <div class="email-meta">
+                    <div class="email-subject-line">This is the last email I'll send about this, {{contact.first_name}}</div>
+                    <div class="email-from">From: Russ Ruffino</div>
+                  </div>
+                </div>
+                <div class="email-body">Hey {{contact.first_name}},
+I'm going to be straight with you.
+
+We don't chase. That's not how we operate. If the timing isn't right or this isn't the right fit for you, that's okay. There's no hard sell here.
+
+But there's a real problem with waiting, and it's not about us. It's about you.
+
+The energy and clarity you had coming out of the Friday Q&A? That has a shelf life. The offer you built in the workshop, the insights from the Q&A on {{custom_code.2.output.result.vipDate}}, the way you could picture exactly who you help and what result you deliver... that sharpness fades as the week fills back up. And every day that passes without a concrete next step is a day that momentum dissipates.
+
+The strategy call is exactly that next step. It's the thing that turns the Friday session from a powerful experience into an actual business decision. One conversation. A plan you can execute starting next week.
+
+After this, if we don't hear from you, we'll assume the timing isn't right. You'll move to our general updates list and hear from us occasionally. No pressure either way.
+
+But if you're serious about building this, now is the time to say so.
+
+Book your strategy call: www.clientsondemand.com/apply
+
+Russ Ruffino
+Clients on Demand</div>
+              </div>
+            </div>
+          </details>
         </div>
       </div>
 
+      <!-- Draft Step 9: Event+146h -->
       <div class="step">
         <div class="step-dot-wrap"><div class="step-dot dot-draft"></div></div>
         <div class="step-content">
-          <div class="step-timing">Event + 146 hours</div>
+          <div class="step-timing">Event + 146 hours &nbsp;<em style="color:#9ca3af;font-weight:400">(≈ 6 days)</em></div>
           <div class="step-subject">Still thinking about it?</div>
           <div class="step-tags"><span class="badge badge-email">Email</span><span class="badge badge-cond">Conditional</span></div>
+          <details>
+            <summary>View content</summary>
+            <div class="msg-block">
+              <div class="email-preview">
+                <div class="email-preview-header">
+                  <div class="email-icon">E</div>
+                  <div class="email-meta">
+                    <div class="email-subject-line">Still thinking about it?</div>
+                    <div class="email-from">From: Russ Ruffino</div>
+                  </div>
+                </div>
+                <div class="email-body">Hey {{contact.first_name}},
+Still on your radar?
+
+I know this week gets busy fast. If the strategy call makes sense but the scheduling page didn't quite fit, just reply to this email with a day that tends to work for you. We'll find a slot.
+
+No form. No funnel. Just a reply.
+
+Russ Ruffino
+Clients on Demand</div>
+              </div>
+            </div>
+          </details>
         </div>
       </div>
 
-    </div><!-- /col-body -->
+    </div><!-- /col-body draft -->
   </div><!-- /col-draft -->
 
 </div><!-- /grid -->
 
 
-<!-- ═══ Delta / Differences Table ═══ -->
+<!-- ═══════════════════════════════════════════
+     DELTA TABLE
+════════════════════════════════════════════ -->
 <div class="delta-section">
   <div class="delta-header">Step-by-Step Timing &amp; Delay Comparison</div>
   <table>
@@ -458,8 +959,6 @@
       </tr>
     </thead>
     <tbody>
-
-      <!-- Instant -->
       <tr>
         <td>1</td>
         <td>Upgrade / Signup Confirmation</td>
@@ -467,21 +966,17 @@
         <td>You're In! Your VIP Workshop Seat is Confirmed</td>
         <td><em style="color:#6b7280">(Workshop + Friday VIP Q&amp;A confirmation — no subject line)</em></td>
         <td><span class="badge badge-both">Email + SMS</span></td>
-        <td class="change-revised">Both instant. Draft email body consolidated into one message covering both workshop and VIP Q&amp;A sessions; Live focuses on VIP benefits only.</td>
+        <td class="change-revised">Both instant. Draft consolidates both workshop and VIP Q&amp;A details into one email; Live focuses on VIP benefits only.</td>
       </tr>
-
-      <!-- 10 min / no equivalent -->
       <tr>
         <td>2</td>
         <td>Immediate Access Info</td>
-        <td><strong>T + 10 min</strong> (after upgrade)</td>
+        <td><strong>T + 10 min</strong></td>
         <td>🚨 Your VIP Call Details</td>
         <td style="color:#9ca3af">— Not present —</td>
         <td><span class="badge badge-email">Email</span></td>
-        <td class="change-removed">Live only. Draft folds Zoom / call details into the Instant email. Draft removes this dedicated 10-min step.</td>
+        <td class="change-removed">Live only. Draft folds Zoom / call details into the Instant email; removes this dedicated 10-min step.</td>
       </tr>
-
-      <!-- 48h before — Draft only -->
       <tr>
         <td>3</td>
         <td>Pre-Event Warm-Up</td>
@@ -489,10 +984,8 @@
         <td style="color:#9ca3af">— Not present —</td>
         <td>Friday is 48 hours out. Here's how to make the most of it.</td>
         <td><span class="badge badge-email">Email</span></td>
-        <td class="change-added">Draft only — new prep email with 3 reflection questions sent 2 days out. Live has no equivalent.</td>
+        <td class="change-added">Draft only — new prep email with 3 reflection questions sent 2 days out.</td>
       </tr>
-
-      <!-- 24h before — Draft only -->
       <tr>
         <td>4</td>
         <td>Pre-Event Reminder</td>
@@ -502,8 +995,6 @@
         <td><span class="badge badge-both">Email + SMS</span></td>
         <td class="change-added">Draft only — 24-hour countdown with Zoom details. Live starts reminders much closer to the event.</td>
       </tr>
-
-      <!-- 5h before — Live only -->
       <tr>
         <td>5</td>
         <td>Day-of Reminder</td>
@@ -513,8 +1004,6 @@
         <td><span class="badge badge-both">Email + SMS</span></td>
         <td class="change-removed">Live only — 5-hour reminder replaced in Draft by a 2–3 hour morning email.</td>
       </tr>
-
-      <!-- 2-3h before — Draft / 1h — Live -->
       <tr>
         <td>6</td>
         <td>Same-Day Close Reminder</td>
@@ -522,10 +1011,8 @@
         <td>⏰ We're going LIVE in 1 Hour – Your VIP Call with Russ</td>
         <td>Today's the day, [name].</td>
         <td>Live: <span class="badge badge-both">Email + SMS</span><br>Draft: <span class="badge badge-email">Email</span></td>
-        <td class="change-revised">Timing shifted earlier in Draft (2–3 h vs 1 h). Draft drops the SMS at this step.</td>
+        <td class="change-revised">Timing shifted earlier in Draft (2–3 h vs 1 h). Draft also drops the SMS at this step.</td>
       </tr>
-
-      <!-- 30 min SMS — Draft only -->
       <tr>
         <td>7</td>
         <td>Final Nudge</td>
@@ -535,8 +1022,6 @@
         <td>Live: <span class="badge badge-both">Email + SMS</span><br>Draft: <span class="badge badge-sms">SMS</span></td>
         <td class="change-revised">Draft moves final nudge to 30 min and drops the Email — SMS only. Live sends Email + SMS at 15 min.</td>
       </tr>
-
-      <!-- Post-event: 24h after — Draft only -->
       <tr>
         <td>8</td>
         <td>Post-Event Debrief</td>
@@ -544,10 +1029,8 @@
         <td style="color:#9ca3af">— Not present —</td>
         <td>Great Q&amp;A yesterday, [name].</td>
         <td><span class="badge badge-email">Email</span></td>
-        <td class="change-added">Draft only — new post-event recap with strategy call CTA. Live has no post-event follow-up beyond the replay email.</td>
+        <td class="change-added">Draft only — post-event recap with strategy call CTA. Live has no post-event follow-up beyond the replay.</td>
       </tr>
-
-      <!-- Replay — Live only -->
       <tr>
         <td>9</td>
         <td>Replay Delivery</td>
@@ -555,10 +1038,8 @@
         <td>Your Workshop Replay</td>
         <td style="color:#9ca3af">— Not present —</td>
         <td><span class="badge badge-email">Email</span></td>
-        <td class="change-removed">Live only — delivers recording + AI prompt library 27 h after upgrade. Draft has no dedicated replay step (may be handled elsewhere).</td>
+        <td class="change-removed">Live only — delivers recording + AI prompt library 27 h after upgrade. Draft has no dedicated replay step.</td>
       </tr>
-
-      <!-- 49h after — Draft only -->
       <tr>
         <td>10</td>
         <td>Follow-Up #1</td>
@@ -568,8 +1049,6 @@
         <td><span class="badge badge-email">Email</span><span class="badge badge-cond" style="margin-left:4px">Conditional</span></td>
         <td class="change-added">Draft only — conditional (no call booked). First re-engagement check-in.</td>
       </tr>
-
-      <!-- ~72-96h — Draft only -->
       <tr>
         <td>11</td>
         <td>Follow-Up #2</td>
@@ -579,8 +1058,6 @@
         <td><span class="badge badge-email">Email</span><span class="badge badge-cond" style="margin-left:4px">Conditional</span></td>
         <td class="change-added">Draft only — conditional. Timing not specified in source; sits between 49 h and 119 h emails.</td>
       </tr>
-
-      <!-- 119h — Draft only -->
       <tr>
         <td>12</td>
         <td>Follow-Up #3</td>
@@ -588,10 +1065,8 @@
         <td style="color:#9ca3af">— Not present —</td>
         <td>This is the last email I'll send about this, [name]</td>
         <td><span class="badge badge-email">Email</span><span class="badge badge-cond" style="margin-left:4px">Conditional</span></td>
-        <td class="change-added">Draft only — conditional final hard close email. Signals move to general list if no booking.</td>
+        <td class="change-added">Draft only — conditional final hard close. Signals move to general list if no booking.</td>
       </tr>
-
-      <!-- 146h — Draft only -->
       <tr>
         <td>13</td>
         <td>Follow-Up #4</td>
@@ -601,13 +1076,14 @@
         <td><span class="badge badge-email">Email</span><span class="badge badge-cond" style="margin-left:4px">Conditional</span></td>
         <td class="change-added">Draft only — conditional soft close. Offers reply-based scheduling instead of form link.</td>
       </tr>
-
     </tbody>
   </table>
 </div>
 
 
-<!-- ═══ Summary Stats ═══ -->
+<!-- ═══════════════════════════════════════════
+     SUMMARY TABLE
+════════════════════════════════════════════ -->
 <div class="delta-section" style="margin-top:24px;">
   <div class="delta-header">Summary</div>
   <table>
@@ -648,7 +1124,7 @@
         <td><strong>Closest Pre-Event Touch</strong></td>
         <td>Event − 15 min</td>
         <td>Event − 30 min (SMS)</td>
-        <td>Live gets closer; Draft backs off to 30 min</td>
+        <td>Live gets closer to event time; Draft backs off to 30 min</td>
       </tr>
       <tr>
         <td><strong>Post-Event Coverage</strong></td>
