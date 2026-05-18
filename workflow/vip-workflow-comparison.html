@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VIP Workflow Comparison: Live vs Draft</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #f0f2f5;
+      color: #1a1a2e;
+      padding: 32px 20px 60px;
+    }
+
+    .page-header {
+      max-width: 1100px;
+      margin: 0 auto 36px;
+    }
+
+    .page-header h1 {
+      font-size: 26px;
+      font-weight: 700;
+      color: #1a1a2e;
+    }
+
+    .page-header p {
+      margin-top: 6px;
+      font-size: 14px;
+      color: #6b7280;
+    }
+
+    .legend {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-top: 16px;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 13px;
+      color: #374151;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 2px 9px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+      white-space: nowrap;
+    }
+
+    .badge-email { background: #dbeafe; color: #1d4ed8; }
+    .badge-sms   { background: #dcfce7; color: #15803d; }
+    .badge-both  { background: #fef3c7; color: #92400e; }
+    .badge-cond  { background: #f3e8ff; color: #7c3aed; }
+
+    /* ─── Comparison grid ─── */
+    .grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+    }
+
+    @media (max-width: 760px) {
+      .grid { grid-template-columns: 1fr; }
+    }
+
+    .col-header {
+      border-radius: 12px 12px 0 0;
+      padding: 18px 22px 14px;
+      font-size: 17px;
+      font-weight: 700;
+    }
+
+    .col-live   .col-header { background: #1d4ed8; color: #fff; }
+    .col-draft  .col-header { background: #0f766e; color: #fff; }
+
+    .col-header .sub {
+      font-size: 12px;
+      font-weight: 400;
+      margin-top: 3px;
+      opacity: .85;
+    }
+
+    .col-body {
+      background: #fff;
+      border-radius: 0 0 12px 12px;
+      padding: 20px 22px 24px;
+      box-shadow: 0 1px 6px rgba(0,0,0,.08);
+    }
+
+    /* ─── Phase headings ─── */
+    .phase-label {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #9ca3af;
+      margin: 22px 0 10px;
+    }
+
+    .phase-label:first-child { margin-top: 0; }
+
+    /* ─── Steps ─── */
+    .step {
+      display: flex;
+      gap: 14px;
+      margin-bottom: 12px;
+    }
+
+    .step:last-child { margin-bottom: 0; }
+
+    .step-dot-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 3px;
+    }
+
+    .step-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .dot-live  { background: #2563eb; }
+    .dot-draft { background: #0d9488; }
+
+    .step-line {
+      width: 2px;
+      flex: 1;
+      background: #e5e7eb;
+      margin-top: 4px;
+    }
+
+    .step-content { flex: 1; }
+
+    .step-timing {
+      font-size: 11px;
+      font-weight: 700;
+      color: #6b7280;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      margin-bottom: 4px;
+    }
+
+    .step-subject {
+      font-size: 13.5px;
+      font-weight: 600;
+      color: #111827;
+      margin-bottom: 5px;
+      line-height: 1.35;
+    }
+
+    .step-subject.no-subject {
+      font-style: italic;
+      color: #6b7280;
+    }
+
+    .step-tags { display: flex; gap: 5px; flex-wrap: wrap; }
+
+    /* ─── Delta summary table ─── */
+    .delta-section {
+      max-width: 1100px;
+      margin: 36px auto 0;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 1px 6px rgba(0,0,0,.08);
+      overflow: hidden;
+    }
+
+    .delta-header {
+      background: #1a1a2e;
+      color: #fff;
+      padding: 16px 22px;
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+
+    thead th {
+      background: #f9fafb;
+      color: #374151;
+      font-weight: 700;
+      text-align: left;
+      padding: 11px 16px;
+      border-bottom: 2px solid #e5e7eb;
+    }
+
+    tbody td {
+      padding: 11px 16px;
+      border-bottom: 1px solid #f3f4f6;
+      vertical-align: top;
+      line-height: 1.45;
+    }
+
+    tbody tr:last-child td { border-bottom: none; }
+    tbody tr:hover td { background: #fafafa; }
+
+    .change-added   { color: #059669; font-weight: 600; }
+    .change-removed { color: #dc2626; font-weight: 600; }
+    .change-revised { color: #d97706; font-weight: 600; }
+    .change-same    { color: #6b7280; }
+
+    .tag-pill {
+      display: inline-block;
+      padding: 1px 7px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+    .tag-live  { background: #dbeafe; color: #1d4ed8; }
+    .tag-draft { background: #ccfbf1; color: #0f766e; }
+    .tag-both2 { background: #f0fdf4; color: #166534; }
+
+    .footnote {
+      max-width: 1100px;
+      margin: 20px auto 0;
+      font-size: 12px;
+      color: #9ca3af;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+
+<div class="page-header">
+  <h1>VIP Workflow Comparison &mdash; Live vs Draft</h1>
+  <p>Generated May 18, 2026 &nbsp;|&nbsp; Clients on Demand &nbsp;|&nbsp; Both workflows include an Instant send followed by timed follow-ups</p>
+  <div class="legend">
+    <span class="legend-item"><span class="badge badge-email">Email</span> Email only</span>
+    <span class="legend-item"><span class="badge badge-sms">SMS</span> SMS only</span>
+    <span class="legend-item"><span class="badge badge-both">Email + SMS</span> Both channels</span>
+    <span class="legend-item"><span class="badge badge-cond">Conditional</span> Sent only if call not booked</span>
+  </div>
+</div>
+
+
+<!-- ═══ Side-by-side columns ═══ -->
+<div class="grid">
+
+  <!-- ── LIVE COLUMN ── -->
+  <div class="col-live">
+    <div class="col-header">
+      Live Workflow
+      <div class="sub">Instant on Upgrade &amp; Live Pre-Event Reminders (VIP)<br>workflow/423d775d&hellip;</div>
+    </div>
+    <div class="col-body">
+
+      <div class="phase-label">Phase 1 — Upgrade Confirmation</div>
+
+      <div class="step">
+        <div class="step-dot-wrap"><div class="step-dot dot-live"></div><div class="step-line"></div></div>
+        <div class="step-content">
+          <div class="step-timing">T + 0 &nbsp;(Instant on upgrade)</div>
+          <div class="step-subject">You're In! Your VIP Workshop Seat is Confirmed</div>
+          <div class="step-tags"><span class="badge badge-both">Email + SMS</span></div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-dot-wrap"><div class="step-dot dot-live"></div><div class="step-line"></div></div>
+        <div class="step-content">
+          <div class="step-timing">T + 10 min &nbsp;(after upgrade)</div>
+          <div class="step-subject">🚨 Your VIP Call Details</div>
+          <div class="step-tags"><span class="badge badge-email">Email</span></div>
+        </div>
+      </div>
+
+
+      <div class="phase-label">Phase 2 — Pre-Event Reminders</div>
+
+      <div class="step">
+        <div class="step-dot-wrap"><div class="step-dot dot-live"></div><div class="step-line"></div></div>
+        <div class="step-content">
+          <div class="step-timing">5 hours before event</div>
+          <div class="step-subject">🚨 Your VIP Call with Russ</div>
+          <div class="step-tags"><span class="badge badge-both">Email + SMS</span></div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-dot-wrap"><div class="step-dot dot-live"></div><div class="step-line"></div></div>
+        <div class="step-content">
+          <div class="step-timing">1 hour before event</div>
+          <div class="step-subject">⏰ We're going LIVE in 1 Hour – Your VIP Call with Russ</div>
+          <div class="step-tags"><span class="badge badge-both">Email + SMS</span></div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-dot-wrap"><div class="step-dot dot-live"></div><div class="step-line"></div></div>
+        <div class="step-content">
+          <div class="step-timing">15 minutes before event</div>
+          <div class="step-subject">⏰ 15 min – Your VIP Call with Russ</div>
+          <div class="step-tags"><span class="badge badge-both">Email + SMS</span></div>
+        </div>
+      </div>
+
+
+      <div class="phase-label">Phase 3 — Post-Event</div>
+
+      <div class="step">
+        <div class="step-dot-wrap"><div class="step-dot dot-live"></div></div>
+        <div class="step-content">
+          <div class="step-timing">T + 27 hours &nbsp;(after upgrade)</div>
+          <div class="step-subject">Your Workshop Replay</div>
+          <div class="step-tags"><span class="badge badge-email">Email</span></div>
+        </div>
+      </div>
+
+    </div><!-- /col-body -->
+  </div><!-- /col-live -->
+
+
+  <!-- ── DRAFT COLUMN ── -->
+  <div class="col-draft">
+    <div class="col-header">
+      Draft Workflow
+      <div class="sub">VIP Pre &amp; Post Reminder (Consolidated)<br>workflow/39cad81c&hellip;</div>
+    </div>
+    <div class="col-body">
+
+      <div class="phase-label">Phase 1 — Signup Confirmation</div>
+
+      <div class="step">
+        <div class="step-dot-wrap"><div class="step-dot dot-draft"></div><div class="step-line"></div></div>
+        <div class="step-content">
+          <div class="step-timing">T + 0 &nbsp;(Instant on signup)</div>
+          <div class="step-subject no-subject">(Workshop + VIP Q&amp;A confirmation — no subject line)</div>
+          <div class="step-tags"><span class="badge badge-both">Email + SMS</span></div>
+        </div>
+      </div>
+
+
+      <div class="phase-label">Phase 2 — Pre-Event Reminders</div>
+
+      <div class="step">
+        <div class="step-dot-wrap"><div class="step-dot dot-draft"></div><div class="step-line"></div></div>
+        <div class="step-content">
+          <div class="step-timing">48 hours before event &nbsp;(Wednesday)</div>
+          <div class="step-subject">Friday is 48 hours out. Here's how to make the most of it.</div>
+          <div class="step-tags"><span class="badge badge-email">Email</span></div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-dot-wrap"><div class="step-dot dot-draft"></div><div class="step-line"></div></div>
+        <div class="step-content">
+          <div class="step-timing">24 hours before event &nbsp;(Thursday)</div>
+          <div class="step-subject">Tomorrow, [name]. One day out.</div>
+          <div class="step-tags"><span class="badge badge-both">Email + SMS</span></div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-dot-wrap"><div class="step-dot dot-draft"></div><div class="step-line"></div></div>
+        <div class="step-content">
+          <div class="step-timing">2–3 hours before event &nbsp;(Friday morning)</div>
+          <div class="step-subject">Today's the day, [name].</div>
+          <div class="step-tags"><span class="badge badge-email">Email</span></div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-dot-wrap"><div class="step-dot dot-draft"></div><div class="step-line"></div></div>
+        <div class="step-content">
+          <div class="step-timing">30 minutes before event</div>
+          <div class="step-subject no-subject">(Going live in 30 min — join link)</div>
+          <div class="step-tags"><span class="badge badge-sms">SMS</span></div>
+        </div>
+      </div>
+
+
+      <div class="phase-label">Phase 3 — Post-Event Follow-Up</div>
+
+      <div class="step">
+        <div class="step-dot-wrap"><div class="step-dot dot-draft"></div><div class="step-line"></div></div>
+        <div class="step-content">
+          <div class="step-timing">Event + 24 hours</div>
+          <div class="step-subject">Great Q&amp;A yesterday, [name].</div>
+          <div class="step-tags"><span class="badge badge-email">Email</span></div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-dot-wrap"><div class="step-dot dot-draft"></div><div class="step-line"></div></div>
+        <div class="step-content">
+          <div class="step-timing">Event + 49 hours</div>
+          <div class="step-subject">Had a chance to process everything yet, [name]?</div>
+          <div class="step-tags"><span class="badge badge-email">Email</span><span class="badge badge-cond">Conditional</span></div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-dot-wrap"><div class="step-dot dot-draft"></div><div class="step-line"></div></div>
+        <div class="step-content">
+          <div class="step-timing">Event + ~72–96 hours &nbsp;(timing unspecified)</div>
+          <div class="step-subject">The gap between knowing and doing (and how to close it)</div>
+          <div class="step-tags"><span class="badge badge-email">Email</span><span class="badge badge-cond">Conditional</span></div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-dot-wrap"><div class="step-dot dot-draft"></div><div class="step-line"></div></div>
+        <div class="step-content">
+          <div class="step-timing">Event + 119 hours</div>
+          <div class="step-subject">This is the last email I'll send about this, [name]</div>
+          <div class="step-tags"><span class="badge badge-email">Email</span><span class="badge badge-cond">Conditional</span></div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-dot-wrap"><div class="step-dot dot-draft"></div></div>
+        <div class="step-content">
+          <div class="step-timing">Event + 146 hours</div>
+          <div class="step-subject">Still thinking about it?</div>
+          <div class="step-tags"><span class="badge badge-email">Email</span><span class="badge badge-cond">Conditional</span></div>
+        </div>
+      </div>
+
+    </div><!-- /col-body -->
+  </div><!-- /col-draft -->
+
+</div><!-- /grid -->
+
+
+<!-- ═══ Delta / Differences Table ═══ -->
+<div class="delta-section">
+  <div class="delta-header">Step-by-Step Timing &amp; Delay Comparison</div>
+  <table>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Phase</th>
+        <th>Timing</th>
+        <th><span class="tag-pill tag-live">Live</span> Subject / Message</th>
+        <th><span class="tag-pill tag-draft">Draft</span> Subject / Message</th>
+        <th>Channel</th>
+        <th>Delta / Change</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <!-- Instant -->
+      <tr>
+        <td>1</td>
+        <td>Upgrade / Signup Confirmation</td>
+        <td><strong>T + 0</strong> (Instant)</td>
+        <td>You're In! Your VIP Workshop Seat is Confirmed</td>
+        <td><em style="color:#6b7280">(Workshop + Friday VIP Q&amp;A confirmation — no subject line)</em></td>
+        <td><span class="badge badge-both">Email + SMS</span></td>
+        <td class="change-revised">Both instant. Draft email body consolidated into one message covering both workshop and VIP Q&amp;A sessions; Live focuses on VIP benefits only.</td>
+      </tr>
+
+      <!-- 10 min / no equivalent -->
+      <tr>
+        <td>2</td>
+        <td>Immediate Access Info</td>
+        <td><strong>T + 10 min</strong> (after upgrade)</td>
+        <td>🚨 Your VIP Call Details</td>
+        <td style="color:#9ca3af">— Not present —</td>
+        <td><span class="badge badge-email">Email</span></td>
+        <td class="change-removed">Live only. Draft folds Zoom / call details into the Instant email. Draft removes this dedicated 10-min step.</td>
+      </tr>
+
+      <!-- 48h before — Draft only -->
+      <tr>
+        <td>3</td>
+        <td>Pre-Event Warm-Up</td>
+        <td><strong>Event − 48 h</strong> (Wednesday)</td>
+        <td style="color:#9ca3af">— Not present —</td>
+        <td>Friday is 48 hours out. Here's how to make the most of it.</td>
+        <td><span class="badge badge-email">Email</span></td>
+        <td class="change-added">Draft only — new prep email with 3 reflection questions sent 2 days out. Live has no equivalent.</td>
+      </tr>
+
+      <!-- 24h before — Draft only -->
+      <tr>
+        <td>4</td>
+        <td>Pre-Event Reminder</td>
+        <td><strong>Event − 24 h</strong> (Thursday)</td>
+        <td style="color:#9ca3af">— Not present —</td>
+        <td>Tomorrow, [name]. One day out.</td>
+        <td><span class="badge badge-both">Email + SMS</span></td>
+        <td class="change-added">Draft only — 24-hour countdown with Zoom details. Live starts reminders much closer to the event.</td>
+      </tr>
+
+      <!-- 5h before — Live only -->
+      <tr>
+        <td>5</td>
+        <td>Day-of Reminder</td>
+        <td><strong>Event − 5 h</strong></td>
+        <td>🚨 Your VIP Call with Russ</td>
+        <td style="color:#9ca3af">— Not present —</td>
+        <td><span class="badge badge-both">Email + SMS</span></td>
+        <td class="change-removed">Live only — 5-hour reminder replaced in Draft by a 2–3 hour morning email.</td>
+      </tr>
+
+      <!-- 2-3h before — Draft / 1h — Live -->
+      <tr>
+        <td>6</td>
+        <td>Same-Day Close Reminder</td>
+        <td>Live: <strong>Event − 1 h</strong><br>Draft: <strong>Event − 2–3 h</strong></td>
+        <td>⏰ We're going LIVE in 1 Hour – Your VIP Call with Russ</td>
+        <td>Today's the day, [name].</td>
+        <td>Live: <span class="badge badge-both">Email + SMS</span><br>Draft: <span class="badge badge-email">Email</span></td>
+        <td class="change-revised">Timing shifted earlier in Draft (2–3 h vs 1 h). Draft drops the SMS at this step.</td>
+      </tr>
+
+      <!-- 30 min SMS — Draft only -->
+      <tr>
+        <td>7</td>
+        <td>Final Nudge</td>
+        <td>Live: <strong>Event − 15 min</strong><br>Draft: <strong>Event − 30 min</strong></td>
+        <td>⏰ 15 min – Your VIP Call with Russ (Email + SMS)</td>
+        <td><em>Going live in 30 min — join link</em> (SMS only)</td>
+        <td>Live: <span class="badge badge-both">Email + SMS</span><br>Draft: <span class="badge badge-sms">SMS</span></td>
+        <td class="change-revised">Draft moves final nudge to 30 min and drops the Email — SMS only. Live sends Email + SMS at 15 min.</td>
+      </tr>
+
+      <!-- Post-event: 24h after — Draft only -->
+      <tr>
+        <td>8</td>
+        <td>Post-Event Debrief</td>
+        <td><strong>Event + 24 h</strong></td>
+        <td style="color:#9ca3af">— Not present —</td>
+        <td>Great Q&amp;A yesterday, [name].</td>
+        <td><span class="badge badge-email">Email</span></td>
+        <td class="change-added">Draft only — new post-event recap with strategy call CTA. Live has no post-event follow-up beyond the replay email.</td>
+      </tr>
+
+      <!-- Replay — Live only -->
+      <tr>
+        <td>9</td>
+        <td>Replay Delivery</td>
+        <td>Live: <strong>T + 27 h</strong> (after upgrade)<br>Draft: —</td>
+        <td>Your Workshop Replay</td>
+        <td style="color:#9ca3af">— Not present —</td>
+        <td><span class="badge badge-email">Email</span></td>
+        <td class="change-removed">Live only — delivers recording + AI prompt library 27 h after upgrade. Draft has no dedicated replay step (may be handled elsewhere).</td>
+      </tr>
+
+      <!-- 49h after — Draft only -->
+      <tr>
+        <td>10</td>
+        <td>Follow-Up #1</td>
+        <td><strong>Event + 49 h</strong></td>
+        <td style="color:#9ca3af">— Not present —</td>
+        <td>Had a chance to process everything yet, [name]?</td>
+        <td><span class="badge badge-email">Email</span><span class="badge badge-cond" style="margin-left:4px">Conditional</span></td>
+        <td class="change-added">Draft only — conditional (no call booked). First re-engagement check-in.</td>
+      </tr>
+
+      <!-- ~72-96h — Draft only -->
+      <tr>
+        <td>11</td>
+        <td>Follow-Up #2</td>
+        <td><strong>Event + ~72–96 h</strong> <em style="color:#9ca3af">(unspecified)</em></td>
+        <td style="color:#9ca3af">— Not present —</td>
+        <td>The gap between knowing and doing (and how to close it)</td>
+        <td><span class="badge badge-email">Email</span><span class="badge badge-cond" style="margin-left:4px">Conditional</span></td>
+        <td class="change-added">Draft only — conditional. Timing not specified in source; sits between 49 h and 119 h emails.</td>
+      </tr>
+
+      <!-- 119h — Draft only -->
+      <tr>
+        <td>12</td>
+        <td>Follow-Up #3</td>
+        <td><strong>Event + 119 h</strong> <em>(≈ 5 days)</em></td>
+        <td style="color:#9ca3af">— Not present —</td>
+        <td>This is the last email I'll send about this, [name]</td>
+        <td><span class="badge badge-email">Email</span><span class="badge badge-cond" style="margin-left:4px">Conditional</span></td>
+        <td class="change-added">Draft only — conditional final hard close email. Signals move to general list if no booking.</td>
+      </tr>
+
+      <!-- 146h — Draft only -->
+      <tr>
+        <td>13</td>
+        <td>Follow-Up #4</td>
+        <td><strong>Event + 146 h</strong> <em>(≈ 6 days)</em></td>
+        <td style="color:#9ca3af">— Not present —</td>
+        <td>Still thinking about it?</td>
+        <td><span class="badge badge-email">Email</span><span class="badge badge-cond" style="margin-left:4px">Conditional</span></td>
+        <td class="change-added">Draft only — conditional soft close. Offers reply-based scheduling instead of form link.</td>
+      </tr>
+
+    </tbody>
+  </table>
+</div>
+
+
+<!-- ═══ Summary Stats ═══ -->
+<div class="delta-section" style="margin-top:24px;">
+  <div class="delta-header">Summary</div>
+  <table>
+    <thead>
+      <tr>
+        <th>Metric</th>
+        <th><span class="tag-pill tag-live">Live</span></th>
+        <th><span class="tag-pill tag-draft">Draft</span></th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Total Steps</strong></td>
+        <td>6</td>
+        <td>10</td>
+        <td>Draft adds 4 post-event conditional follow-ups + 2 earlier pre-event reminders</td>
+      </tr>
+      <tr>
+        <td><strong>Emails Sent</strong></td>
+        <td>6</td>
+        <td>9</td>
+        <td>Draft adds 48h prep, 24h reminder, 4× post-event series</td>
+      </tr>
+      <tr>
+        <td><strong>SMS Sent</strong></td>
+        <td>4 (paired with email)</td>
+        <td>3 (instant, 24h before, 30min before)</td>
+        <td>Draft reduces SMS volume; drops 5h and 15min paired SMS</td>
+      </tr>
+      <tr>
+        <td><strong>Earliest Pre-Event Touch</strong></td>
+        <td>T + 10 min (call details)</td>
+        <td>Event − 48 h (Wednesday prep)</td>
+        <td>Draft starts warming up 2 days earlier</td>
+      </tr>
+      <tr>
+        <td><strong>Closest Pre-Event Touch</strong></td>
+        <td>Event − 15 min</td>
+        <td>Event − 30 min (SMS)</td>
+        <td>Live gets closer; Draft backs off to 30 min</td>
+      </tr>
+      <tr>
+        <td><strong>Post-Event Coverage</strong></td>
+        <td>1 email (replay at T+27h)</td>
+        <td>5 emails over 6 days (4 conditional)</td>
+        <td>Draft significantly extends post-event engagement window</td>
+      </tr>
+      <tr>
+        <td><strong>Replay / AI Prompts Delivery</strong></td>
+        <td>T + 27 h after upgrade</td>
+        <td>Not specified in draft</td>
+        <td>Replay delivery step may need to be added to draft</td>
+      </tr>
+      <tr>
+        <td><strong>Conditional Logic</strong></td>
+        <td>None</td>
+        <td>4 emails (if call not booked)</td>
+        <td>Draft introduces conditional branching for non-converters</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+<p class="footnote">
+  * <strong>Conditional</strong> steps in Draft are triggered only when the contact has not booked a strategy call. Timing for "The gap between knowing and doing" email is unspecified in source — recommended slot is Event + 72 h or Event + 96 h to maintain cadence between the 49 h and 119 h sends.<br>
+  * Live workflow spans two separate GHL automations: <em>Instant on Upgrade</em> (no URL given) and <em>Live Pre-Event Reminders (VIP)</em> (workflow/423d775d&hellip;). Draft consolidates both into a single automation: <em>VIP Pre &amp; Post Reminder</em> (workflow/39cad81c&hellip;).
+</p>
+
+</body>
+</html>
