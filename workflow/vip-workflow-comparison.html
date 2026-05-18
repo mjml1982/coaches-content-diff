@@ -85,20 +85,7 @@
 
     /* ─── Expandable content ─── */
     details { margin-top: 6px; }
-    details summary {
-      font-size: 11.5px; font-weight: 600; color: #6b7280;
-      cursor: pointer; user-select: none; list-style: none;
-      display: flex; align-items: center; gap: 5px;
-    }
-    details summary::-webkit-details-marker { display: none; }
-    details summary::before {
-      content: '▶';
-      font-size: 9px;
-      transition: transform .15s;
-      display: inline-block;
-    }
-    details[open] summary::before { transform: rotate(90deg); }
-    details summary:hover { color: #374151; }
+    details summary { display: none; }
 
     .msg-block { margin-top: 10px; }
 
@@ -202,7 +189,17 @@
 
 <div class="page-header">
   <h1>VIP Workflow Comparison &mdash; Live vs Draft</h1>
-  <p>Generated May 18, 2026 &nbsp;|&nbsp; Clients on Demand &nbsp;|&nbsp; Both workflows include an Instant send followed by timed follow-ups &nbsp;|&nbsp; Click <strong>▶ View content</strong> on any step to expand the full message</p>
+  <p>Generated May 18, 2026 &nbsp;|&nbsp; Clients on Demand &nbsp;|&nbsp; Both workflows include an Instant send followed by timed follow-ups</p>
+  <p style="margin-top:8px;font-size:13px;">
+    📄 <strong>Email Copy Source:</strong>
+    <a href="https://docs.google.com/document/d/1JpFU5Tr8jI8DOeomO6wh8iD4rSZTT1Ln9JkiD5476GM/edit?tab=t.0" target="_blank" style="color:#1d4ed8;">View Google Doc</a>
+    &nbsp;&nbsp;
+    🔵 <strong>Live GHL Workflow:</strong>
+    <a href="https://app.clientsondemand.app/location/h83O4TKy09yLLdfnIw3K/workflow/423d775d-9115-4d0c-a9e7-3c01cc7f539d" target="_blank" style="color:#1d4ed8;">workflow/423d775d&hellip;</a>
+    &nbsp;&nbsp;
+    🟢 <strong>Draft GHL Workflow:</strong>
+    <a href="https://app.clientsondemand.app/location/h83O4TKy09yLLdfnIw3K/workflow/39cad81c-9e11-4152-b4f4-04853fb36db3" target="_blank" style="color:#0f766e;">workflow/39cad81c&hellip;</a>
+  </p>
   <div class="legend">
     <span class="legend-item"><span class="badge badge-email">Email</span> Email only</span>
     <span class="legend-item"><span class="badge badge-sms">SMS</span> SMS only</span>
@@ -221,7 +218,9 @@
   <div class="col-live">
     <div class="col-header">
       Live Workflow
-      <div class="sub">Instant on Upgrade &amp; Live Pre-Event Reminders (VIP)<br>workflow/423d775d&hellip;</div>
+      <div class="sub">Instant on Upgrade &amp; Live Pre-Event Reminders (VIP)<br>
+        <a href="https://app.clientsondemand.app/location/h83O4TKy09yLLdfnIw3K/workflow/423d775d-9115-4d0c-a9e7-3c01cc7f539d" target="_blank" style="color:#93c5fd;word-break:break-all;">app.clientsondemand.app &rarr; workflow/423d775d&hellip;</a>
+      </div>
     </div>
     <div class="col-body">
 
@@ -235,7 +234,7 @@
           <div class="step-timing">T + 0 &nbsp;(Instant on upgrade)</div>
           <div class="step-subject">You're In! Your VIP Workshop Seat is Confirmed</div>
           <div class="step-tags"><span class="badge badge-both">Email + SMS</span></div>
-          <details>
+          <details open>
             <summary>View content</summary>
             <div class="msg-block">
               <div class="email-preview">
@@ -292,7 +291,7 @@ Excited to have you!</div>
           <div class="step-timing">T + 10 min &nbsp;(after upgrade)</div>
           <div class="step-subject">🚨 Your VIP Call Details</div>
           <div class="step-tags"><span class="badge badge-email">Email</span></div>
-          <details>
+          <details open>
             <summary>View content</summary>
             <div class="msg-block">
               <div class="email-preview">
@@ -336,7 +335,7 @@ See you then!
           <div class="step-timing">5 hours before event</div>
           <div class="step-subject">🚨 Your VIP Call with Russ</div>
           <div class="step-tags"><span class="badge badge-both">Email + SMS</span></div>
-          <details>
+          <details open>
             <summary>View content</summary>
             <div class="msg-block">
               <div class="email-preview">
@@ -385,7 +384,7 @@ Password: RUSSVIP</div>
           <div class="step-timing">1 hour before event</div>
           <div class="step-subject">⏰ We're going LIVE in 1 Hour – Your VIP Call with Russ</div>
           <div class="step-tags"><span class="badge badge-both">Email + SMS</span></div>
-          <details>
+          <details open>
             <summary>View content</summary>
             <div class="msg-block">
               <div class="email-preview">
@@ -431,7 +430,7 @@ Let's get any final questions you have answered and your high-ticket offer done!
           <div class="step-timing">15 minutes before event</div>
           <div class="step-subject">⏰ 15 min – Your VIP Call with Russ</div>
           <div class="step-tags"><span class="badge badge-both">Email + SMS</span></div>
-          <details>
+          <details open>
             <summary>View content</summary>
             <div class="msg-block">
               <div class="email-preview">
@@ -480,7 +479,7 @@ Let's get any final questions you have answered and your high-ticket offer done!
           <div class="step-timing">T + 27 hours &nbsp;(after upgrade)</div>
           <div class="step-subject">Your Workshop Replay</div>
           <div class="step-tags"><span class="badge badge-email">Email</span></div>
-          <details>
+          <details open>
             <summary>View content</summary>
             <div class="msg-block">
               <div class="email-preview">
@@ -526,7 +525,9 @@ Feel free to revisit the training anytime — pause, rewind, and take notes at y
   <div class="col-draft">
     <div class="col-header">
       Draft Workflow
-      <div class="sub">VIP Pre &amp; Post Reminder (Consolidated)<br>workflow/39cad81c&hellip;</div>
+      <div class="sub">VIP Pre &amp; Post Reminder (Consolidated)<br>
+        <a href="https://app.clientsondemand.app/location/h83O4TKy09yLLdfnIw3K/workflow/39cad81c-9e11-4152-b4f4-04853fb36db3" target="_blank" style="color:#5eead4;word-break:break-all;">app.clientsondemand.app &rarr; workflow/39cad81c&hellip;</a>
+      </div>
     </div>
     <div class="col-body">
 
@@ -540,7 +541,7 @@ Feel free to revisit the training anytime — pause, rewind, and take notes at y
           <div class="step-timing">T + 0 &nbsp;(Instant on signup)</div>
           <div class="step-subject no-subject">(Workshop + VIP Q&amp;A confirmation — no subject line)</div>
           <div class="step-tags"><span class="badge badge-both">Email + SMS</span></div>
-          <details>
+          <details open>
             <summary>View content</summary>
             <div class="msg-block">
               <div class="email-preview">
@@ -595,7 +596,7 @@ P.S. The Friday VIP Q&A is a one-time live event. If you want your offer reviewe
           <div class="step-timing">48 hours before event &nbsp;(Wednesday)</div>
           <div class="step-subject">Friday is 48 hours out. Here's how to make the most of it.</div>
           <div class="step-tags"><span class="badge badge-email">Email</span></div>
-          <details>
+          <details open>
             <summary>View content</summary>
             <div class="msg-block">
               <div class="email-preview">
@@ -643,7 +644,7 @@ Clients on Demand</div>
           <div class="step-timing">24 hours before event &nbsp;(Thursday)</div>
           <div class="step-subject">Tomorrow, [name]. One day out.</div>
           <div class="step-tags"><span class="badge badge-both">Email + SMS</span></div>
-          <details>
+          <details open>
             <summary>View content</summary>
             <div class="msg-block">
               <div class="email-preview">
@@ -685,7 +686,7 @@ Clients on Demand</div>
           <div class="step-timing">2–3 hours before event &nbsp;(Friday morning)</div>
           <div class="step-subject">Today's the day, [name].</div>
           <div class="step-tags"><span class="badge badge-email">Email</span></div>
-          <details>
+          <details open>
             <summary>View content</summary>
             <div class="msg-block">
               <div class="email-preview">
@@ -718,7 +719,7 @@ Clients on Demand</div>
           <div class="step-timing">30 minutes before event</div>
           <div class="step-subject no-subject">(Going live in 30 min — join link)</div>
           <div class="step-tags"><span class="badge badge-sms">SMS</span></div>
-          <details>
+          <details open>
             <summary>View content</summary>
             <div class="msg-block">
               <div class="sms-preview">
@@ -740,7 +741,7 @@ Clients on Demand</div>
           <div class="step-timing">Event + 24 hours</div>
           <div class="step-subject">Great Q&amp;A yesterday, [name].</div>
           <div class="step-tags"><span class="badge badge-email">Email</span></div>
-          <details>
+          <details open>
             <summary>View content</summary>
             <div class="msg-block">
               <div class="email-preview">
@@ -781,7 +782,7 @@ Clients on Demand</div>
           <div class="step-timing">Event + 49 hours</div>
           <div class="step-subject">Had a chance to process everything yet, [name]?</div>
           <div class="step-tags"><span class="badge badge-email">Email</span><span class="badge badge-cond">Conditional</span></div>
-          <details>
+          <details open>
             <summary>View content</summary>
             <div class="msg-block">
               <div class="email-preview">
@@ -823,7 +824,7 @@ Clients on Demand</div>
           <div class="step-timing">Event + ~72–96 hours &nbsp;<em style="color:#9ca3af;font-weight:400">(timing unspecified in source)</em></div>
           <div class="step-subject">The gap between knowing and doing (and how to close it)</div>
           <div class="step-tags"><span class="badge badge-email">Email</span><span class="badge badge-cond">Conditional</span></div>
-          <details>
+          <details open>
             <summary>View content</summary>
             <div class="msg-block">
               <div class="email-preview">
@@ -866,7 +867,7 @@ Clients on Demand</div>
           <div class="step-timing">Event + 119 hours &nbsp;<em style="color:#9ca3af;font-weight:400">(≈ 5 days)</em></div>
           <div class="step-subject">This is the last email I'll send about this, [name]</div>
           <div class="step-tags"><span class="badge badge-email">Email</span><span class="badge badge-cond">Conditional</span></div>
-          <details>
+          <details open>
             <summary>View content</summary>
             <div class="msg-block">
               <div class="email-preview">
@@ -909,7 +910,7 @@ Clients on Demand</div>
           <div class="step-timing">Event + 146 hours &nbsp;<em style="color:#9ca3af;font-weight:400">(≈ 6 days)</em></div>
           <div class="step-subject">Still thinking about it?</div>
           <div class="step-tags"><span class="badge badge-email">Email</span><span class="badge badge-cond">Conditional</span></div>
-          <details>
+          <details open>
             <summary>View content</summary>
             <div class="msg-block">
               <div class="email-preview">
